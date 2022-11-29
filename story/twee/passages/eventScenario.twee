@@ -3,6 +3,7 @@
 <div class="events-wrapper">
     <div class="events-story">
         <div class="header">Story</div>
+        <div><<saveStory>></div>
         <div class="events-story-body"><<storyDesc>></div>
     </div>
     <div class="events-interactions">
