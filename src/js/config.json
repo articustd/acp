@@ -1,0 +1,9 @@
+{
+    "history": {
+        "controls": true,
+        "maxStates": 2
+    },
+    "debug": false,
+    "logging": true,
+    "dev": true
+}

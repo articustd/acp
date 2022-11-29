@@ -1,0 +1,56 @@
+sugarcube-2:
+  macros:
+    timerDebug:
+      name: timerDebug
+    gameStart:
+      name: gameStart
+    koboldPopCounter:
+      name: koboldPopCounter
+    koboldPopBar:
+      name: koboldPopBar
+      container: true
+    resourceCounter:
+      name: resourceCounter
+    resourceBar:
+      name: resourceBar
+      container: true
+    resourceWorkerControl:
+      name: resourceWorkerControl
+    koboldAvailableCounter:
+      name: koboldAvailableCounter
+    resourceWorkerCounter:
+      name: resourceWorkerCounter
+    hubMap:
+      name: hubMap
+    buyBuildingControl:
+      name: buyBuildingControl
+      container: true
+    findResourceAction:
+      name: findResourceAction
+    gatherResourceAction:
+      name: gatherResourceAction
+    deskList:
+      name: deskList
+    deskCommands:
+      name: deskCommands
+    hideUntilBuilt:
+      name: hideUntilBuilt
+      container: true
+    spendResourceAction:
+      name: spendResourceAction
+    sleepAction:
+      name: sleepAction
+    testSceneAdd:
+      name: testSceneAdd
+    removeScene:
+      name: removeScene
+    interactionList:
+      name: interactionList
+    storyDesc:
+      name: storyDesc
+    drawflow:
+      name: drawflow
+    healthBar:
+      name: healthBar
+    attackBar:
+      name: attackBar

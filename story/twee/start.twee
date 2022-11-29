@@ -1,0 +1,18 @@
+// :: Preload [script]
+// // Lock the screen and save the ID
+// var lockID = LoadScreen.lock();
+
+// // Pause for 5 second before unlocking the screen
+// setTimeout(function(){
+//     LoadScreen.unlock(lockID);
+// }, 5000);
+
+:: Start [nohud] {"position":"150,550","size":"100,100"}
+<h1>Dragon Manager</h1>
+
+/* @@color:red;
+!!WARNING
+This game contains furry adult content, if you've gotten here by mistake now is your chance to turn back. By clicking the "New Game" you are confirming you are the appropriate age to be consuming this content.@@ */
+
+
+<<button "Play" "intro">><</button>> <<button "Skip Intro" "hub">><<gameStart>><</button>>

@@ -1,0 +1,66 @@
+@use './hubMap';
+@import '../twine/theme';
+@import '../common/buttons';
+
+#hud {
+    align-items: center;
+    background: $background-color;
+    border-style: none solid solid solid;
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 65em;
+    position: sticky;
+    top: 0px;
+    z-index: 50;
+}
+
+.hudItem {
+    display: flex;
+    flex: 1;
+    padding: 0 5px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    &.left {
+        justify-content: end;
+    }
+
+    &.right {
+        justify-content: start;
+    }
+}
+
+.menuButton {
+    position: absolute;
+    left: -90px;
+    width: 75px;
+    height: 35px;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    >li {
+        border: 1px solid $hover-color;
+        height: 2.5em;
+        margin: 5px 0px;
+
+        >div {
+            text-transform: uppercase;
+        }
+    }
+}
+
+.menu-version {
+    text-align: right;
+}
+
+#ui-bar {
+    display: none;
+}
+

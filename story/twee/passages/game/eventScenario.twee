@@ -1,0 +1,13 @@
+:: eventScenario [nobr noreturn]
+<h1>?EventName</h1>
+<div class="events-wrapper">
+    <div class="events-story">
+        <div class="header">Story</div>
+        <div class="events-story-body"><<storyDesc>></div>
+    </div>
+    <div class="events-interactions">
+        <div class="header">Interactions</div>
+        <<interactionList>>
+    </div>
+</div>
+<br/>
