@@ -24,10 +24,10 @@ export function showHUD() {
 
     if (variables().dev)
         $menuList.append($tickerEditorButton)
-            .append($hubButton)
-            .append($hudTestButton)
-            .append($eventTestButton)
-            .append($fightTestButton)
+            // .append($hubButton)
+            // .append($hudTestButton)
+            // .append($eventTestButton)
+            // .append($fightTestButton)
             .append($drawflowButton)
 
     $menuButton.click(() => {

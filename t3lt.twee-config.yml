@@ -54,3 +54,5 @@ sugarcube-2:
       name: healthBar
     attackBar:
       name: attackBar
+    startEvent:
+      name: startEvent
