@@ -11,7 +11,7 @@ Config = {
 	...Config, ...storyConfig, saves: {
 		autoload: checkAutoload(),
 		autosave: false,
-		id: 'dragon-manager',
+		id: 'acp',
 		isAllowed: function () { return State.passage !== 'Start' },
 		slots: 8
 	},
