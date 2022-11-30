@@ -1,5 +1,3 @@
-import { KoboldGameObject } from "@GameEngine/gameobjects/kobold";
-import { BaseResource } from "@GameEngine/gameobjects/resources/BaseResource";
 import { logger } from "@util/Logging";
 import { Scene } from "phaser";
 
@@ -14,7 +12,6 @@ export class MainLoop extends Scene {
     }
 
     create() {
-        this.kobold = this.add.kobold()
     }
 
     update(t, dt) { // FIXME When off tab, updates are not calced, use previous time state to figure out what the new delta is and compensate
@@ -38,4 +35,5 @@ export class MainLoop extends Scene {
     }
 
     getAction(name) { return _.find(this.actions, { name }) }
+
 }

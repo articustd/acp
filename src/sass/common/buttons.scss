@@ -12,22 +12,4 @@
     &:hover {
         background-color: $hover-color;
     }
-
-    &-worker {
-        @extend .button;
-        height: auto;
-        border-color: $hover-color;
-
-        &:hover {
-            border-color: $hover-color;
-        }
-        
-        &.right {
-            margin-left: 10px;
-        }
-
-        &-container {
-            display: flex;
-        }
-    }
 }

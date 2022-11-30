@@ -9,29 +9,38 @@ export class BaseInteraction extends GameObjects.GameObject {
     interval
     leadsTo
     clear
+    snippetsActive
     snippets
     _counter
     baseCounter
     progressInteractions
     passive
     final
-    consume
     classes
 
     constructor(scene, interactionData) {
         super(scene, 'Interaction')
 
-        this.consume = false
         this.clear = false
         this.final = false
+        this.burnResource = false
+        this.burnAmount = 0
         this._counter = 0
         this.baseCounter = 0
         this.progressInteractions = []
+
         _.each(interactionData, (value, key) => {
             this[key] = value
         })
+
+        this.setSnippetActive()
         this._cooldown = this.baseCooldown + 1
-        this.interval = (this.snippets.length > 1) ? _.floor(this.baseCooldown / this.snippets.length) : this.baseCooldown
+        this.interval = (this.snippetsActive.length > 1) ? _.floor(this.baseCooldown / this.snippetsActive.length) : this.baseCooldown
+
+        if (interactionData.resourceUse)
+            this.setResourceUse()
+        if (interactionData.resourceProvide)
+            this.resoureProvide = this.scene.getResource(this.resourceProvide)
     }
 
     preUpdate(t, dt) {
@@ -44,10 +53,12 @@ export class BaseInteraction extends GameObjects.GameObject {
     fire() {
         if (this.clear)
             this.scene.story.clearActiveInteractions()
-        if (this.consume)
-            this.scene.consumeKobolds()
         if (this.passive)
             this.scene.changePassiveSnippets(this.passive)
+        if (this.resoureProvide)
+            this.resoureProvide.get(this.provideAmount)
+        if (this.burnResource)
+            this.resourceUse.spend(this.burnAmount)
         this.pushSnippet()
         this.progressOthers()
     }
@@ -57,7 +68,7 @@ export class BaseInteraction extends GameObjects.GameObject {
     }
 
     pushSnippet() {
-        this.scene.story.push(_.sample(this.snippets))
+        this.scene.story.push(_.sample(this.snippetsActive))
         this.scene.story.activateInteractions(this.leadsTo)
     }
 
@@ -69,6 +80,29 @@ export class BaseInteraction extends GameObjects.GameObject {
 
     progress(amt = 1) {
         this.counter += amt
+    }
+
+    setResourceUse() {
+        this.resourceUse = this.scene.getResource(this.resourceUse)
+
+        this.resourceUse.on(`${this.resourceUse.name}TotalChange`, (total)=>{ this.setSnippetActive() })
+    }
+
+    setSnippetActive() {
+        if (this.resourceUse) {
+            logger(this.resourceUse)
+            let comp = [0, this.resourceUse.total]
+            _.each(this.snippets, (snippet, key) => {
+                let remainder = this.resourceUse.total - key
+                if (remainder >= 0 && remainder < comp[1])
+                    comp = [key, remainder]
+                return remainder // Remainder is 0, kick out early
+            })
+            logger(this.snippets)
+            this.snippetsActive = this.snippets[comp[0]]
+            return
+        }
+        this.snippetsActive = this.snippets
     }
 
     get active() { return this._active }

@@ -2,7 +2,6 @@ import { logger } from '@util/Logging';
 import { WEBGL, Game } from 'phaser'
 import { MainLoop } from './scenes/MainLoop';
 import { EventInteraction } from './scenes/EventInteraction';
-import { KoboldPlugin } from '@GameEngine/gameobjects/kobold';
 import { ResourcePlugin } from './gameobjects/resources/ResourcePlugin';
 import { InteractionPlugin } from './gameobjects/interactions/InteractionPlugin';
 import { StoryPlugin } from './gameobjects/story';
@@ -38,7 +37,6 @@ let phaserConfig = {
     // },
     plugins: {
         global: [
-            { key: 'KoboldPlugin', plugin: KoboldPlugin, start: true },
             { key: 'InteractionPlugin', plugin: InteractionPlugin, start: true },
             { key: 'ResourcePlugin', plugin: ResourcePlugin, start: true },
             { key: 'StoryPlugin', plugin: StoryPlugin, start: true },

@@ -43,7 +43,8 @@ export function showHUD() {
         $drawflowButton.click(() => { Dialog.close(); Engine.play("drawflow") })
     }
     
-    $container.append($('<div/>').wiki(`''Kobold''<div><<koboldAvailableCounter>>/<<koboldPopCounter>></div>`).addClass('hudItem'))
+    // $container.append($('<div/>').wiki(`''Kobold''<div><<koboldAvailableCounter>>/<<koboldPopCounter>></div>`).addClass('hudItem'))
+    $container.append($('<div/>').wiki('Am Empty Now').addClass('hudItem'))
     $container.append($menuButton)
 
     $('#passages').before($container)

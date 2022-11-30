@@ -8,11 +8,11 @@ export class EventInteraction extends Scene {
     interactions
     story
     leadsTo
-    kobolds
     passives
     passiveSnippets
     passiveMin
     passiveCounter
+    resources
 
     constructor() {
         super("EventInteraction")
@@ -20,14 +20,18 @@ export class EventInteraction extends Scene {
 
     create(data) {
         this.name = data.eventName
-        this.kobolds = data.kobolds
-        this.interactions = _.map(data.interactions, (interaction) => {
-            return this.add.interaction(interaction)
-        })
         this.passives = data.passives
         this.passiveSnippets = []
         this.passiveMin = 600
         this.passiveCounter = 0
+
+        this.resources = _.map(data.resources, (resource) => {
+            return this.add.resource(resource)
+        })
+        this.interactions = _.map(data.interactions, (interaction) => {
+            return this.add.interaction(interaction)
+        })
+        
         this.story = this.add.story(data.startingDesc)
     }
 
@@ -42,10 +46,6 @@ export class EventInteraction extends Scene {
                 this.passiveCounter = 0
             }
         }
-    }
-
-    consumeKobolds(amt = this.kobolds) {
-        getScene('MainLoop').kobold.spend(amt)
     }
 
     changePassiveSnippets(name) {
@@ -76,4 +76,6 @@ export class EventInteraction extends Scene {
     getActiveInteractions() { return _.filter(this.interactions, { active: true }) }
 
     getInteraction(name) { return _.find(this.interactions, { name }) }
+
+    getResource(name) { return _.find(this.resources, { name }) }
 }

@@ -6,12 +6,8 @@ import _ from "lodash"
 Macro.add('startEvent', {
     skipArgs: false,
     handler: function () {
-        let [eventName, kobolds] = this.args
-        let kobold = getScene('MainLoop').kobold
+        let [eventName] = this.args
         let event = getEvent(eventName)
-
-        if(kobolds)
-            event = {...event, kobolds}
 
         logger({event})
 
@@ -21,11 +17,6 @@ Macro.add('startEvent', {
 
         let $btn = $('<button/>').wiki(eventName).click(() => {
             Engine.play('eventScenario')
-        })
-
-        $btn.prop('disabled', !kobold.enoughAvailable(kobolds))
-        kobold.on('availablePopChange', () => {
-            $btn.prop('disabled', !kobold.enoughAvailable(kobolds))
         })
 
         $(this.output).append($btn)
