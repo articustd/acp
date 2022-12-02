@@ -52,7 +52,7 @@ function getScene(scene) {
 }
 
 function addScene(scene, autoStart, data) {
-    game.scene.add(scene, getSceneConfig(scene), autoStart, data)
+    return game.scene.add(scene, getSceneConfig(scene), autoStart, data)
 }
 
 function removeScene(scene) {

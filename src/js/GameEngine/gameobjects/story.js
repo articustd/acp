@@ -4,8 +4,6 @@ import { GameObjects, Plugins } from "phaser";
 
 export class StoryObject extends GameObjects.GameObject {
     storySnippets
-    actSnippets
-    acts
 
     constructor(scene, startingDesc) {
         super(scene, 'Story')
@@ -33,7 +31,19 @@ export class StoryObject extends GameObjects.GameObject {
 
     push(snippet) {
         this.storySnippets.push(snippet)
-        this.emit('StoryUpdate', { idx: this.storySnippets.length, snippet })
+        this.emit('StoryUpdate', { idx: this.storySnippets.length-1, snippet })
+    }
+
+    toJSON() {
+        return {
+            name: this.name,
+            storySnippets: this.storySnippets,
+        }
+    }
+
+    loadData(data) {
+        this.name = data.name
+        this.storySnippets = data.storySnippets
     }
 }
 

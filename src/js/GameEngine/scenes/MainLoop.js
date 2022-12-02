@@ -28,7 +28,6 @@ export class MainLoop extends Scene {
     }
 
     loadData(data) {
-        logger({data})
         _.each(this.actions, (action) => {
             action.loadData(_.find(data.actions, { name: action.name }))
         })

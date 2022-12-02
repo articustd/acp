@@ -9,8 +9,6 @@ Macro.add('startEvent', {
         let [eventName] = this.args
         let event = getEvent(eventName)
 
-        logger({event})
-
         if (getScene('EventInteraction'))
             removeScene('EventInteraction')
         addScene('EventInteraction', true, event)

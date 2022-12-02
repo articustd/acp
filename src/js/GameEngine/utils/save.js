@@ -8,6 +8,5 @@ export function saveGameData() {
     _.each(game.scene.scenes, (scene) => {
         saveData[scene.scene.key] = scene.toJSON()
     })
-
     return saveData
 }

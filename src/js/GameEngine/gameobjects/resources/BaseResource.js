@@ -43,12 +43,11 @@ export class BaseResource extends GameObjects.GameObject {
         return (!_.isNull(this.maxAmount) && (this.maxAmount - this.total) >= amt) || _.isNull(this.maxAmount)
     }
 
-    toJSON(data) {
-        let json = super.toJSON()
+    toJSON() {
         return {
-            ...json, ...data,
+            name: this.name,
             active: this.active,
-            total: this.total,
+            total: this._total,
             maxAmount: this.maxAmount
         }
     }
@@ -56,7 +55,7 @@ export class BaseResource extends GameObjects.GameObject {
     loadData(data) {
         if (data) {
             this.active = data.active
-            this.total = data.total
+            this._total = data.total
             this.maxAmount = data.maxAmount
         }
     }

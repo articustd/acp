@@ -90,7 +90,6 @@ export class BaseInteraction extends GameObjects.GameObject {
 
     setSnippetActive() {
         if (this.resourceUse) {
-            logger(this.resourceUse)
             let comp = [0, this.resourceUse.total]
             _.each(this.snippets, (snippet, key) => {
                 let remainder = this.resourceUse.total - key
@@ -98,7 +97,6 @@ export class BaseInteraction extends GameObjects.GameObject {
                     comp = [key, remainder]
                 return remainder // Remainder is 0, kick out early
             })
-            logger(this.snippets)
             this.snippetsActive = this.snippets[comp[0]]
             return
         }
@@ -114,14 +112,22 @@ export class BaseInteraction extends GameObjects.GameObject {
     get counter() { return this._counter }
     set counter(counter) { this._counter = counter; this.emit(`${this.name}CounterChange`, counter); }
 
-    toJSON(data) {
-        let json = super.toJSON()
-        return { ...json, ...data, cooldown: this.cooldown }
+    toJSON() {
+        return { 
+            name: this.name,
+            _active: this._active,
+            _cooldown: this.cooldown, 
+            snippetsActive: this.snippetsActive,
+            _counter: this.counter,
+        }
     }
 
     loadData(data) {
         if (data) {
-            this._cooldown = data.cooldown
+            this._active = data._active
+            this._cooldown = data._cooldown
+            this.snippetsActive = data.snippetsActive
+            this._counter = data._counter
         }
     }
 }

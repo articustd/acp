@@ -22,7 +22,7 @@ Macro.add('interactionList', {
                 $btn.addClass('hide')
             else
                 $btn.addClass(interaction.classes)
-                
+
             interaction.on(`${interaction.name}ActiveChange`, (active) => {
                 if (active)
                     $btn.removeClass('hide')
@@ -38,7 +38,13 @@ Macro.add('interactionList', {
                 else
                     $btn.addClass(interaction.classes)
             })
+            
+            calcBackgroundSize(interaction, $btn)
             $btn.prop('disabled', interaction.isDisabled())
+            if (interaction.isDisabled())
+                $btn.removeClass(interaction.classes)
+            else
+                $btn.addClass(interaction.classes)
             $(this.output).append($btn)
         })
     }

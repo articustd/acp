@@ -31,6 +31,7 @@ setup.ImagePath = "assets/";
 	// Config Auto Load if not on Start passage
 	// Fixes Phaser not being avaliable on initial render
 	$(document).on(':storyready', function (ev) {
+		logger('In story ready')
 		if (checkAutoload())
 			Save.autosave.load()
 		else
@@ -39,6 +40,7 @@ setup.ImagePath = "assets/";
 
 	// Setup noreturn
 	$(document).on(':passagestart', function (ev) {
+		logger('In passage start')
 		loadPhaser(LoadScreen.lock(), ev)
 	});
 
@@ -76,9 +78,17 @@ function passageStartRoutine(ev) {
 
 function loadPhaser(lockID, ev) {
 	if (!getScene('MainLoop'))
-		setTimeout(loadPhaser, 50, lockID, ev)
+		setTimeout(loadPhaser, 100, lockID, ev)
 	else {
 		passageStartRoutine(ev)
+		LoadScreen.unlock(lockID)
+	}
+}
+
+function loadPhaserScenes(lockID, ev) {
+	if (!getScene('EventInteraction'))
+		setTimeout(loadPhaserScenes, 50, lockID, ev)
+	else {
 		LoadScreen.unlock(lockID)
 	}
 }

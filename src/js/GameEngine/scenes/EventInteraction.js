@@ -4,10 +4,8 @@ import _ from "lodash";
 import { Scene } from "phaser";
 
 export class EventInteraction extends Scene {
-    name
     interactions
     story
-    leadsTo
     passives
     passiveSnippets
     passiveMin
@@ -16,15 +14,16 @@ export class EventInteraction extends Scene {
 
     constructor() {
         super("EventInteraction")
+
+        this.passiveSnippets = []
+        this.passiveMin = 600 // Have this configurable in the story for when things get really spicy?
+        this.passiveCounter = 0
     }
 
     create(data) {
-        this.name = data.eventName
+        this.eventName = data.eventName
         this.passives = data.passives
-        this.passiveSnippets = []
-        this.passiveMin = 600
-        this.passiveCounter = 0
-
+        
         this.resources = _.map(data.resources, (resource) => {
             return this.add.resource(resource)
         })
@@ -62,15 +61,29 @@ export class EventInteraction extends Scene {
 
     toJSON() {
         let interactions = _.map(this.interactions, (interaction) => { return interaction.toJSON() })
+        let resources = _.map(this.resources, (resource) => { return resource.toJSON() })
+        let story = this.story.toJSON()
         return {
-            name: this.name,
-            interactions
+            eventName: this.eventName,
+            interactions,
+            resources,
+            story,
+            passiveSnippets: this.passiveSnippets,
+            passiveCounter: this.passiveCounter
         }
     }
 
     loadData(data) {
-        this.name = data.name
-        _.each(this.interactions, (interaction) => { interaction.loadData(_.find(data.interactions, { name: interaction.name })) })
+        this.eventName = data.eventName
+        this.passiveSnippets = data.passiveSnippets
+        this.passiveCounter = data.passiveCounter
+        _.each(data.resources, (resource) => { 
+            _.find(this.resources, { name: resource.name }).loadData(resource)
+        })
+        _.each(data.interactions, (interaction) => { 
+            _.find(this.interactions, { name: interaction.name }).loadData(interaction)
+        })
+        this.story.loadData(data.story)
     }
 
     getActiveInteractions() { return _.filter(this.interactions, { active: true }) }
