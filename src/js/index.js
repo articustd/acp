@@ -35,7 +35,7 @@ setup.ImagePath = "assets/";
 		if (checkAutoload())
 			Save.autosave.load()
 		else
-			Engine.show()
+			Engine.play('Start')
 	})
 
 	// Setup noreturn
@@ -66,7 +66,7 @@ setup.ImagePath = "assets/";
 })(Config, State, Story, Engine, Dialog, $(document));
 
 function checkAutoload() {
-	return State.passage !== 'Start' && !_.isEmpty(State.passage) && Save.autosave.ok()
+	return State.passage !== 'Start' && !_.isEmpty(State.passage) && Save.autosave.ok() && Save.autosave.has()
 }
 
 function passageStartRoutine(ev) {
