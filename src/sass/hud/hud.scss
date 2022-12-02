@@ -4,11 +4,12 @@
 #hud {
     align-items: center;
     background: $background-color;
-    border-style: none solid solid solid;
+    border-radius: 2px;
     display: flex;
     height: 50px;
     justify-content: center;
     margin: 0 auto;
+    margin-bottom: 3em;
     max-width: 65em;
     position: sticky;
     top: 0px;
@@ -21,22 +22,13 @@
     padding: 0 5px;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
-
-    &.left {
-        justify-content: end;
-    }
-
-    &.right {
-        justify-content: start;
-    }
+    align-items: start;
+    margin-left: 2em;
 }
 
-.menuButton {
-    position: absolute;
-    left: -90px;
-    width: 75px;
-    height: 35px;
+.menu-button {
+    min-width: 3em;
+    min-height: 3em;
 }
 
 .menu-list {
