@@ -1,4 +1,5 @@
-@use '../twine/theme';
+@import '../twine/theme';
+@import '../common/buttons';
 
 @mixin header {
     align-self: center;
@@ -12,64 +13,112 @@
 
     &-wrapper {
         @extend .events;
+        flex-direction: column
     }
 
     &-story {
         @extend .events;
         flex-direction: column;
-        flex: 5;
-        height: 40em;
+        max-height: 40em;
+        position: relative;
+
+        &.to {
+            display: none;
+            position: absolute;
+            height: 2em;
+            width: 3em;
+            z-index: 1;
+
+            &-bottom {
+                @extend .to;
+
+                bottom: 1em;
+                right: 1em;
+            }
+
+            &-top {
+                @extend .to;
+
+                top: 1em;
+                right: 1em;
+            }
+        }
+
+        &.show {
+            display: block;
+            background: transparent
+        }
 
         &>.header {
             @include header;
         }
 
-        &-body {
-            overflow-y: auto;
+        &.body {
+            overflow: hidden;
+            border: solid $hover-color;
+            border-top: 2px;
+            border-bottom: 2px;
+            height: 40em;
+
+            &:hover {
+                overflow-y: overlay;
+            }
+
             /* width */
             &::-webkit-scrollbar {
-                width: 10px;
+                width: 0.25em;
             }
 
             /* Track */
             &::-webkit-scrollbar-track {
-                background: #f1f1f1;
-                border-radius: 5px;
+                background: transparent;
             }
 
             /* Handle */
             &::-webkit-scrollbar-thumb {
                 background: #888;
-                border-radius: 5px;
+                width: 0.25em;
             }
 
             /* Handle on hover */
             &::-webkit-scrollbar-thumb:hover {
-                background: #555;
+                background: #999;
             }
 
             &>.gray {
-                background-color: #555
+                background: $background-color;
+                border: solid $hover-color;
+                // For some reason, have to use left/right instead of top/bottom
+                border-left: 2px;
+                border-right: 2px;
             }
 
             &>div {
-                padding: 5px;
+                display: flex;
+                padding: 1em;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
             }
         }
     }
 
     &-interactions {
         @extend .events;
-        flex-direction: column;
-        flex: 4;
+        flex-flow: row wrap;
+        max-width: 53.5em;
+        margin-top: 2em;
 
         &>.header {
             @include header;
         }
 
         &>button {
-            height: 40px;
-            margin: 10px 20px;
+            @extend .button;
+            height: 2.5em;
+            flex: 1 1 18em;
+            margin: 0.5em;
+            border-color: transparent;
 
             &:disabled {
                 background: linear-gradient(#444, #444) no-repeat;
@@ -78,9 +127,12 @@
                 border: 0px;
             }
 
-            &.red{
+            &.red {
                 background-color: #ff0000;
-                border-color: #ff4e4e;
+
+                &:hover {
+                    background-color: #ff3131;
+                }
             }
         }
 

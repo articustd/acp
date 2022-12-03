@@ -4,6 +4,9 @@ import { logger } from "@util/Logging"
 export function showHUD() {
     let story = getScene('EventInteraction').story
     let $container = $('<div/>').attr('id', 'hud')
+
+    $container.append($('<div/>').wiki(`''?EventName''~~?EventVersion~~`).addClass('hud-item'))
+
     let $menuButton = $('<div/>').append('<i class="fa fa-bars" aria-hidden="true"/>').addClass('button menu-button').attr('title', 'Dev Menu')
     let $saveMenuButton = $('<div/>').append('<i class="fa fa-floppy-o" aria-hidden="true"/>').addClass('button menu-button').attr('title', 'Save/Load Game')
     let $restartMenuButton = $('<div/>').append('<i class="fa fa-power-off" aria-hidden="true"/>').addClass('button menu-button').attr('title', 'Restart Game')
@@ -17,7 +20,6 @@ export function showHUD() {
     })
 
     let $tickerEditorButton = createMenuItem(`Ticker Editor`)
-    let $eventTestButton = createMenuItem(`Event Test`)
     let $drawflowButton = createMenuItem(`Drawflow`)
 
     let $menuList = $('<ul/>').addClass('menu-list')
@@ -25,7 +27,6 @@ export function showHUD() {
 
     $menuList
         .append($tickerEditorButton)
-        // .append($eventTestButton)
         .append($drawflowButton)
 
     $menuButton.click(() => {
@@ -42,12 +43,9 @@ export function showHUD() {
 
     let devButtons = function () {
         $tickerEditorButton.click(() => { Dialog.close(); Engine.play("devRate") })
-        $eventTestButton.click(() => { Dialog.close(); Engine.play("eventScenario") })
         $drawflowButton.click(() => { Dialog.close(); Engine.play("drawflow") })
     }
 
-    // $container.append($('<div/>').wiki(`''Kobold''<div><<koboldAvailableCounter>>/<<koboldPopCounter>></div>`).addClass('hudItem'))
-    $container.append($('<div/>').wiki(`''?EventName''~~?EventVersion~~`).addClass('hudItem'))
     $container
         .append($saveStoryMenuButton)
         .append($saveMenuButton)

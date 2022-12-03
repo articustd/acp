@@ -6,7 +6,7 @@ import templates from './template'
 import Core, { game, getScene } from './GameEngine/Core'
 import { logger } from '@util/Logging'
 import { loadGameData, saveGameData } from '@GameEngine/utils'
-import { showHUD } from './resourceHUD'
+import { showHUD } from './HUD'
 Config = {
 	...Config, ...storyConfig, saves: {
 		autoload: checkAutoload(),

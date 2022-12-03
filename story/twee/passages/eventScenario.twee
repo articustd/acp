@@ -1,12 +1,9 @@
 :: eventScenario [nobr noreturn]
 <div class="events-wrapper">
     <div class="events-story">
-        <div class="header">Story</div>
-        <div class="events-story-body"><<storyDesc>></div>
+        <<storyDesc>>
     </div>
     <div class="events-interactions">
-        <div class="header">Interactions</div>
         <<interactionList>>
     </div>
 </div>
-<br/>

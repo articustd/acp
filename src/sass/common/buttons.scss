@@ -13,4 +13,8 @@
     &:hover {
         background-color: $hover-color;
     }
+
+    &.no-border {
+        border-color: transparent;
+    }
 }
