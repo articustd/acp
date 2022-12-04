@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 2px;
+    border-radius: 5px;
 
     cursor: pointer;
     background-color: $background-color;
@@ -16,5 +16,13 @@
 
     &.no-border {
         border-color: transparent;
+    }
+
+    &.no-radius {
+        border-radius: 0px;
+    }
+
+    &.right {
+        border-radius: 0px 0px 5px 0px;
     }
 }

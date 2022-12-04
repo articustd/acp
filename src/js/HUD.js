@@ -7,10 +7,10 @@ export function showHUD() {
 
     $container.append($('<div/>').wiki(`''?EventName''~~?EventVersion~~`).addClass('hud-item'))
 
-    let $menuButton = $('<div/>').append('<i class="fa fa-bars" aria-hidden="true"/>').addClass('button menu-button').attr('title', 'Dev Menu')
-    let $saveMenuButton = $('<div/>').append('<i class="fa fa-floppy-o" aria-hidden="true"/>').addClass('button menu-button').attr('title', 'Save/Load Game')
-    let $restartMenuButton = $('<div/>').append('<i class="fa fa-power-off" aria-hidden="true"/>').addClass('button menu-button').attr('title', 'Restart Game')
-    let $saveStoryMenuButton = $('<div/>').append('<i class="fa fa-book" aria-hidden="true"/>').addClass('button menu-button').attr('title', 'Export Story')
+    let $menuButton = $('<div/>').append('<i class="fa fa-bars" aria-hidden="true"/>').addClass('button menu-button right').attr('title', 'Dev Menu')
+    let $saveMenuButton = $('<div/>').append('<i class="fa fa-floppy-o" aria-hidden="true"/>').addClass('button menu-button no-radius').attr('title', 'Save/Load Game')
+    let $restartMenuButton = $('<div/>').append('<i class="fa fa-power-off" aria-hidden="true"/>').addClass('button menu-button right').attr('title', 'Restart Game')
+    let $saveStoryMenuButton = $('<div/>').append('<i class="fa fa-book" aria-hidden="true"/>').addClass('button menu-button no-radius').attr('title', 'Export Story')
 
     $saveMenuButton.click(() => { Dialog.close(); UI.saves(); })
     $restartMenuButton.click(() => { Dialog.close(); UI.restart(); })

@@ -13,6 +13,7 @@ Macro.add('storyDesc', {
             .append($(`<i class="fa fa-angle-double-down fa-2x" aria-hidden="true"/>`))
             .click(() => {
                 $container.scrollTop($($container).prop('scrollHeight'))
+                hideButton($toBottomButton)
             })
 
         let $toTopButton = $('<button/>')
@@ -20,6 +21,7 @@ Macro.add('storyDesc', {
             .append($(`<i class="fa fa-angle-double-up fa-2x" aria-hidden="true"/>`))
             .click(() => {
                 $container.scrollTop(0)
+                hideButton($toTopButton)
             })
 
         story.on('StoryUpdate', ({ idx, snippet }) => {
@@ -34,7 +36,7 @@ Macro.add('storyDesc', {
             else
                 hideButton($toTopButton)
 
-            if ($container.prop('scrollHeight') - $container.scrollTop() > 800)
+            if ($container.prop('scrollHeight') - $container.scrollTop() > $container.height()+100)
                 showButton($toBottomButton)
             else
                 hideButton($toBottomButton)
@@ -44,14 +46,13 @@ Macro.add('storyDesc', {
             $container.append(drawStory(snippet, idx,))
         })
 
-        logger(`ScrollHeight ${$($container).prop('scrollHeight')}`)
-        $container.scrollTop($($container).prop('scrollHeight'))
+        if(story.storySnippets.length > 6)
+            showButton($toBottomButton)
 
         $(this.output)
             .append($toTopButton)
             .append($toBottomButton)
             .append($container)
-
     }
 })
 
