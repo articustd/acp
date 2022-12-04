@@ -10,6 +10,8 @@ Macro.add('interactionList', {
         _.each(event.interactions, (interaction) => {
             let $btn = $('<button/>').wiki(interaction.name).click(() => {
                 interaction.fire()
+                let $scrollContainer = $('.events-story .body')
+                $scrollContainer.scrollTop($($scrollContainer).prop('scrollHeight'))
                 if (interaction.final) {
                     let $returnBtn = $('<button/>').wiki('Return').click(() => {
                         Engine.play(variables().return)
