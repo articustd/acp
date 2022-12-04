@@ -1,8 +1,9 @@
 import { getScene } from "@GameEngine/Core"
+import { exportStory } from "@GameEngine/utils/storyExport"
 import { logger } from "@util/Logging"
 
 export function showHUD() {
-    let story = getScene('EventInteraction').story
+    let event = getScene('EventInteraction')
     let $container = $('<div/>').attr('id', 'hud')
 
     $container.append($('<div/>').wiki(`''?EventName''~~?EventVersion~~`).addClass('hud-item'))
@@ -15,7 +16,7 @@ export function showHUD() {
     $saveMenuButton.click(() => { Dialog.close(); UI.saves(); })
     $restartMenuButton.click(() => { Dialog.close(); UI.restart(); })
     $saveStoryMenuButton.click(() => {
-        let blob = new Blob([formatStory(story.storySnippets)], { type: "text/plain;charset=utf-8" });
+        let blob = new Blob([exportStory(event)], { type: "text/plain;charset=utf-8" });
         saveAs(blob, 'story.txt')
     })
 
