@@ -13,14 +13,19 @@
 
     &-wrapper {
         @extend .events;
-        flex-direction: column
+        flex-direction: column;
+        height: 85vh;
+        max-height: 55em;
     }
 
     &-story {
         @extend .events;
         flex-direction: column;
         max-height: 40em;
+        min-height: 1em;
         position: relative;
+        flex: 1;
+
 
         &.to {
             display: none;
