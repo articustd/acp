@@ -24,10 +24,20 @@ Macro.add('storyDesc', {
                 hideButton($toTopButton)
             })
 
+        let $newAlert = $('<button/>')
+            .addClass('events-story button no-border to-middle warning')
+            .append($(`<i class="fa fa-exclamation fa-lg" aria-hidden="true"/>`))
+            .click(() => {
+                $container.scrollTop($($container).prop('scrollHeight'))
+                hideButton($newAlert)
+            })
+
         story.on('StoryUpdate', ({ idx, snippet }) => {
             $container.append(drawStory(snippet, idx))
             if (!$toBottomButton.hasClass('show'))
                 $container.scrollTop($($container).prop('scrollHeight'))
+            else
+                showButton($newAlert)
         })
 
         $container.scroll(() => {
@@ -36,7 +46,7 @@ Macro.add('storyDesc', {
             else
                 hideButton($toTopButton)
 
-            if ($container.prop('scrollHeight') - $container.scrollTop() > $container.height()+100)
+            if ($container.prop('scrollHeight') - $container.scrollTop() > $container.height() + 100)
                 showButton($toBottomButton)
             else
                 hideButton($toBottomButton)
@@ -46,12 +56,13 @@ Macro.add('storyDesc', {
             $container.append(drawStory(snippet, idx,))
         })
 
-        if(story.storySnippets.length > 6)
+        if (story.storySnippets.length > 6)
             showButton($toBottomButton)
 
         $(this.output)
             .append($toTopButton)
             .append($toBottomButton)
+            .append($newAlert)
             .append($container)
     }
 })

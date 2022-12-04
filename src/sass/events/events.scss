@@ -47,6 +47,21 @@
                 top: 1em;
                 right: 1em;
             }
+
+            &-middle {
+                @extend .to;
+
+                bottom: 1em;
+                left: 50%;
+            }
+        }
+
+        &.warning {
+            background-color: #ff0000!important;
+
+            &:hover {
+                background-color: #ff3131!important;
+            }
         }
 
         &.show {
