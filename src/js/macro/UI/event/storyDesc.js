@@ -48,8 +48,10 @@ Macro.add('storyDesc', {
 
             if ($container.prop('scrollHeight') - $container.scrollTop() > $container.height() + 100)
                 showButton($toBottomButton)
-            else
+            else {
                 hideButton($toBottomButton)
+                hideButton($newAlert)
+            }
         })
 
         _.each(story.storySnippets, (snippet, idx) => {
