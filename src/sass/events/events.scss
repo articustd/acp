@@ -48,11 +48,11 @@
                 right: 1em;
             }
 
-            &-middle {
+            &-left {
                 @extend .to;
 
                 bottom: 1em;
-                left: 50%;
+                left: 1em;
             }
         }
 

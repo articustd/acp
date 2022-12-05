@@ -25,7 +25,7 @@ Macro.add('storyDesc', {
             })
 
         let $newAlert = $('<button/>')
-            .addClass('events-story button no-border to-middle warning')
+            .addClass('events-story button no-border to-left warning')
             .append($(`<i class="fa fa-exclamation fa-lg" aria-hidden="true"/>`))
             .click(() => {
                 $container.scrollTop($($container).prop('scrollHeight'))
