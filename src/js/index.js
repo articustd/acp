@@ -86,11 +86,3 @@ function loadPhaser(lockID, ev) {
 		LoadScreen.unlock(lockID)
 	}
 }
-
-function loadPhaserScenes(lockID, ev) {
-	if (!getScene('EventInteraction'))
-		setTimeout(loadPhaserScenes, 50, lockID, ev)
-	else {
-		LoadScreen.unlock(lockID)
-	}
-}

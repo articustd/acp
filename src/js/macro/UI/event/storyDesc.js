@@ -67,10 +67,7 @@ Macro.add('storyDesc', {
             .append($newAlert)
             .append($container)
 
-        setTimeout(() => {
-            console.log("Delayed for 0.1 second.");
-            $('.events-story .body').scrollTop($('.events-story .body').prop('scrollHeight'))
-        }, 200)
+        checkRendered($container)
     }
 })
 
@@ -87,4 +84,11 @@ function drawStory(snippet, idx) {
     if (idx % 2 === 0)
         $desc.addClass('gray')
     return $desc
+}
+
+function checkRendered($container) {
+	if ($container.prop('scrollHeight') === 0)
+		setTimeout(checkRendered, 10, $container)
+	else
+        $container.scrollTop($container.prop('scrollHeight'))
 }
