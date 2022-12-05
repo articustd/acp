@@ -66,6 +66,11 @@ Macro.add('storyDesc', {
             .append($toBottomButton)
             .append($newAlert)
             .append($container)
+
+        setTimeout(() => {
+            console.log("Delayed for 0.1 second.");
+            $('.events-story .body').scrollTop($('.events-story .body').prop('scrollHeight'))
+        }, 200)
     }
 })
 

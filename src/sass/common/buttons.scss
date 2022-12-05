@@ -11,8 +11,10 @@
     cursor: pointer;
     background-color: $background-color;
 
-    &:hover {
-        background-color: $hover-color;
+    @media (hover: hover) {
+        &:hover {
+            background-color: $hover-color;
+        }
     }
 
     &.no-border {

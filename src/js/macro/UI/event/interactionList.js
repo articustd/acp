@@ -8,17 +8,28 @@ Macro.add('interactionList', {
         let event = getScene('EventInteraction')
 
         _.each(event.interactions, (interaction) => {
-            let $btn = $('<button/>').wiki(interaction.name).click(() => {
-                interaction.fire()
-                let $scrollContainer = $('.events-story .body')
-                $scrollContainer.scrollTop($($scrollContainer).prop('scrollHeight'))
-                if (interaction.final) {
-                    let $returnBtn = $('<button/>').wiki('Return').click(() => {
-                        Engine.play(variables().return)
-                    })
-                    $(this.output).append($returnBtn)
+            let detectTap = false;
+            let $btn = $('<button/>').wiki(interaction.name).on('click touchend', () => {
+                if (event.type == "click") detectTap = true;
+                if (detectTap) {
+                    interaction.fire()
+                    let $scrollContainer = $('.events-story .body')
+                    $scrollContainer.scrollTop($($scrollContainer).prop('scrollHeight'))
+                    if (interaction.final) {
+                        let $returnBtn = $('<button/>').wiki('Return').click(() => {
+                            Engine.play(variables().return)
+                        })
+                        $(this.output).append($returnBtn)
+                    }
                 }
             })
+
+            $btn.on('touchstart', function () {
+                detectTap = true; // Detects all touch events
+            });
+            $btn.on('touchmove', function () {
+                detectTap = false; // Excludes the scroll events from touch events
+            });
 
             if (!interaction.active)
                 $btn.addClass('hide')
@@ -40,7 +51,7 @@ Macro.add('interactionList', {
                 else
                     $btn.addClass(interaction.classes)
             })
-            
+
             calcBackgroundSize(interaction, $btn)
             $btn.prop('disabled', interaction.isDisabled())
             if (interaction.isDisabled())
