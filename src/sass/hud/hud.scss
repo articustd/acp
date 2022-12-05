@@ -1,5 +1,6 @@
 @import '../twine/theme';
 @import '../common/buttons';
+@import '../common/media';
 
 #hud {
     align-items: center;
@@ -14,6 +15,11 @@
     position: sticky;
     top: 0px;
     z-index: 50;
+
+    // Tablet
+    @media only screen and (max-width: $tablet) {
+        margin-bottom: 1.5em;
+    }
 }
 
 .hud-item {
@@ -24,6 +30,11 @@
     flex-direction: column;
     align-items: start;
     margin-left: 2em;
+
+    // Tablet
+    @media only screen and (max-width: $tablet) {
+        font-size: 0.65em;
+    }
 }
 
 .menu-button {
