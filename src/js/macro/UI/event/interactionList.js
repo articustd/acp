@@ -10,8 +10,6 @@ Macro.add('interactionList', {
         _.each(event.interactions, (interaction) => {
             let detectTap = false;
             let $btn = $('<button/>').wiki(interaction.name).on('click', (event) => {
-                logger($btn)
-                
                 if (event.type == "click") detectTap = true;
                 if (detectTap) {
                     interaction.fire()
@@ -30,7 +28,6 @@ Macro.add('interactionList', {
 
             $btn.on('touchend touchstart touchmove', function () {
                 detectTap = false; // Detects all touch events
-                logger('touchend')
             });
 
             if (!interaction.active)

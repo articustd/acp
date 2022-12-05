@@ -38,8 +38,6 @@ export class EventInteraction extends Scene {
         if(this.passiveSnippets.length > 0) {
             this.passiveCounter++
             let rand = _.random(1, 10000)
-            if (rand > 9990)
-                logger(rand)
             if(this.passiveCounter > this.passiveMin && rand > 9990){
                 this.story.push(this.getRandomSnippet())
                 this.passiveCounter = 0

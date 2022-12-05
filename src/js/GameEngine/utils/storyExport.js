@@ -13,7 +13,6 @@ function formatStory(story) {
 
 function getEventHeader(event) {
     let currDate = new Date()
-    logger(event)
     return `${event.eventName}\n${currDate.toString()}\n\n`
 }
 
