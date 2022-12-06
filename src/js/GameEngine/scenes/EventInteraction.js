@@ -1,5 +1,6 @@
 import { getScene } from "@GameEngine/Core";
 import { logger } from "@util/Logging";
+import { Queue } from "@util/Queue";
 import _ from "lodash";
 import { Scene } from "phaser";
 
@@ -32,6 +33,10 @@ export class EventInteraction extends Scene {
         })
         
         this.story = this.add.story(data.startingDesc)
+        this.queueMax = data.queueMax
+        this.activeQueue = new Queue()
+
+        this.setQueue()
     }
 
     update(t, dt) {
@@ -39,7 +44,7 @@ export class EventInteraction extends Scene {
             this.passiveCounter++
             let rand = _.random(1, 10000)
             if(this.passiveCounter > this.passiveMin && rand > 9990){
-                this.story.push(this.getRandomSnippet())
+                this.story.push(this.findSnippet())
                 this.passiveCounter = 0
             }
         }
@@ -50,24 +55,41 @@ export class EventInteraction extends Scene {
         this.passiveCounter = 0
     }
 
-    getRandomSnippet() {
-        let snippet = _.sample(this.passiveSnippets)
-        if(snippet === _.last(this.story.storySnippets))
-            snippet = this.getRandomSnippet()
-        return snippet
+    findSnippet() {
+        let snippetIdx = this.randSnippet()
+        this.activeQueue.enqueue(snippetIdx)
+        return this.passiveSnippets[snippetIdx]
+    }
+
+    randSnippet() {
+        let snippetIdx = _.random(0, this.passiveSnippets.length - 1)    
+        if (_.find(this.activeQueue.queue, (o)=>{return o === snippetIdx}) !== undefined)
+            snippetIdx = this.randSnippet()
+        return snippetIdx
+    }
+
+    setQueue() {
+        if(this.queueMax)
+            this.activeQueue.max = this.queueMax
+        else
+            this.activeQueue.max = _.floor(this.passiveSnippets.length/2, 0)
+        
+        this.activeQueue.clear()
     }
 
     toJSON() {
         let interactions = _.map(this.interactions, (interaction) => { return interaction.toJSON() })
         let resources = _.map(this.resources, (resource) => { return resource.toJSON() })
         let story = this.story.toJSON()
+        let activeQueue = this.activeQueue.toJSON()
         return {
             eventName: this.eventName,
             interactions,
             resources,
             story,
             passiveSnippets: this.passiveSnippets,
-            passiveCounter: this.passiveCounter
+            passiveCounter: this.passiveCounter,
+            activeQueue
         }
     }
 
@@ -82,6 +104,7 @@ export class EventInteraction extends Scene {
             _.find(this.interactions, { name: interaction.name }).loadData(interaction)
         })
         this.story.loadData(data.story)
+        this.activeQueue.loadData(data.activeQueue)
     }
 
     getActiveInteractions() { return _.filter(this.interactions, { active: true }) }

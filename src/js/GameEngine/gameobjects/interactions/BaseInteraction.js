@@ -2,6 +2,7 @@ import { GameObjects } from "phaser";
 import { logger } from "@util/Logging";
 import _ from "lodash";
 import { getScene } from "@GameEngine/Core";
+import { Queue } from "@util/Queue";
 
 export class BaseInteraction extends GameObjects.GameObject {
     _cooldown
@@ -28,12 +29,14 @@ export class BaseInteraction extends GameObjects.GameObject {
         this._counter = 0
         this.baseCounter = 0
         this.progressInteractions = []
+        this.activeQueue = new Queue()
 
         _.each(interactionData, (value, key) => {
             this[key] = value
         })
 
         this.setSnippetActive()
+        this.setQueue()
         this._cooldown = this.baseCooldown + 1
         this.interval = (this.snippetsActive.length > 1) ? _.floor(this.baseCooldown / this.snippetsActive.length) : this.baseCooldown
 
@@ -68,7 +71,7 @@ export class BaseInteraction extends GameObjects.GameObject {
     }
 
     pushSnippet() {
-        this.scene.story.push(_.sample(this.snippetsActive))
+        this.scene.story.push(this.findSnippet())
         this.scene.story.activateInteractions(this.leadsTo)
     }
 
@@ -103,6 +106,28 @@ export class BaseInteraction extends GameObjects.GameObject {
         this.snippetsActive = this.snippets
     }
 
+    setQueue() {
+        if(this.queueMax)
+            this.activeQueue.max = this.queueMax
+        else
+            this.activeQueue.max = _.floor(this.snippetsActive.length/2, 0)
+        
+        this.activeQueue.clear()
+    }
+
+    findSnippet() {
+        let snippetIdx = this.randSnippet()
+        this.activeQueue.enqueue(snippetIdx)
+        return this.snippetsActive[snippetIdx]
+    }
+
+    randSnippet() {
+        let snippetIdx = _.random(0, this.snippetsActive.length - 1)    
+        if (_.find(this.activeQueue.queue, (o)=>{return o === snippetIdx}) !== undefined)
+            snippetIdx = this.randSnippet()
+        return snippetIdx
+    }
+
     get active() { return this._active }
     set active(active) { this._active = active; this.counter = 0; this.emit(`${this.name}ActiveChange`, active); }
 
@@ -113,12 +138,14 @@ export class BaseInteraction extends GameObjects.GameObject {
     set counter(counter) { this._counter = counter; this.emit(`${this.name}CounterChange`, counter); }
 
     toJSON() {
+        let activeQueue = this.activeQueue.toJSON()
         return { 
             name: this.name,
             _active: this._active,
             _cooldown: this.cooldown, 
             snippetsActive: this.snippetsActive,
             _counter: this.counter,
+            activeQueue
         }
     }
 
@@ -128,6 +155,7 @@ export class BaseInteraction extends GameObjects.GameObject {
             this._cooldown = data._cooldown
             this.snippetsActive = data.snippetsActive
             this._counter = data._counter
+            this.activeQueue.loadData(data.activeQueue)
         }
     }
 }
