@@ -33,7 +33,7 @@ Macro.add('storyDesc', {
             })
 
         story.on('StoryUpdate', ({ idx, snippet }) => {
-            $container.append(drawStory(snippet, idx))
+            $container.append(drawStory(snippet, idx,'new'))
             if (!$toBottomButton.hasClass('show'))
                 $container.scrollTop($($container).prop('scrollHeight'))
             else
@@ -55,11 +55,8 @@ Macro.add('storyDesc', {
         })
 
         _.each(story.storySnippets, (snippet, idx) => {
-            $container.append(drawStory(snippet, idx,))
+            $container.append(drawStory(snippet, idx, 'load'))
         })
-
-        if (story.storySnippets.length > 6)
-            showButton($toBottomButton)
 
         $(this.output)
             .append($toTopButton)
@@ -79,16 +76,19 @@ function hideButton($element) {
     $element.removeClass('show')
 }
 
-function drawStory(snippet, idx) {
+function drawStory(snippet, idx, snippetAni) {
     let $desc = $('<div/>').wiki(snippet)
+    if(snippetAni)
+        $desc.addClass(snippetAni)
+    $desc.on("transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd", () => { $desc.removeClass('new') })
     if (idx % 2 === 0)
         $desc.addClass('gray')
     return $desc
 }
 
 function checkRendered($container) {
-	if ($container.prop('scrollHeight') === 0)
-		setTimeout(checkRendered, 10, $container)
-	else
+    if ($container.prop('scrollHeight') === 0)
+        setTimeout(checkRendered, 10, $container)
+    else
         $container.scrollTop($container.prop('scrollHeight'))
 }
