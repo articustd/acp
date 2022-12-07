@@ -1,1 +1,1 @@
-import resourceTemplate from './resourceTemplate'
+import EventTemplate from './EventTemplate'

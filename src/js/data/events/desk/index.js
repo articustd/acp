@@ -1,1 +1,0 @@
-export { deskPickupKobold } from './pickupKobold'

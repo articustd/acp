@@ -61,7 +61,3 @@ export function showHUD() {
 function createMenuItem(text) {
     return $('<li/>').append($('<div/>').addClass('button').wiki(text))
 }
-
-function formatStory(storySnippets) {
-    return _.join(storySnippets, '\n')
-}
