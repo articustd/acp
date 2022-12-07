@@ -39,11 +39,15 @@
         flex: 1;
 
         &.to {
-            display: none;
+            display: block;
+            visibility: visible;
             position: absolute;
             height: 2em;
             width: 3em;
             z-index: 1;
+            opacity: 1;
+            animation: fadeIn 0.5s;
+            background: transparent;
 
             &-bottom {
                 @extend .to;
@@ -75,9 +79,9 @@
             }
         }
 
-        &.show {
-            display: block;
-            background: transparent
+        &.hide {
+            opacity: 0;
+            visibility: hidden;
         }
 
         &>.header {
@@ -136,7 +140,7 @@
                 }
 
                 &.load {
-                    animation: load-animate 0.3s ease-out;
+                    animation: fadeIn 0.3s ease-out;
                 }
             }
 
@@ -208,21 +212,23 @@
 }
 
 @keyframes append-animate {
-	from {
-		transform: translateX(-100%);
-		opacity: 0;
-	}
-	to {
-		transform: translateY(0%);
-		opacity: 1;	
-	}
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0%);
+        opacity: 1;
+    }
 }
 
-@keyframes load-animate {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;	
-	}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

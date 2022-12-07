@@ -9,7 +9,7 @@ Macro.add('storyDesc', {
         let $container = $(`<div>`).addClass("events-story body")
 
         let $toBottomButton = $('<button/>')
-            .addClass('events-story button no-border to-bottom')
+            .addClass('events-story button no-border to-bottom hide')
             .append($(`<i class="fa fa-angle-double-down fa-2x" aria-hidden="true"/>`))
             .click(() => {
                 $container.scrollTop($($container).prop('scrollHeight'))
@@ -17,7 +17,7 @@ Macro.add('storyDesc', {
             })
 
         let $toTopButton = $('<button/>')
-            .addClass('events-story button no-border to-top')
+            .addClass('events-story button no-border to-top hide')
             .append($(`<i class="fa fa-angle-double-up fa-2x" aria-hidden="true"/>`))
             .click(() => {
                 $container.scrollTop(0)
@@ -25,7 +25,7 @@ Macro.add('storyDesc', {
             })
 
         let $newAlert = $('<button/>')
-            .addClass('events-story button no-border to-left warning')
+            .addClass('events-story button no-border to-left warning hide')
             .append($(`<i class="fa fa-exclamation fa-lg" aria-hidden="true"/>`))
             .click(() => {
                 $container.scrollTop($($container).prop('scrollHeight'))
@@ -33,11 +33,11 @@ Macro.add('storyDesc', {
             })
 
         story.on('StoryUpdate', ({ idx, snippet }) => {
-            $container.append(drawStory(snippet, idx,'new'))
-            if (!$toBottomButton.hasClass('show'))
-                $container.scrollTop($($container).prop('scrollHeight'))
-            else
+            $container.append(drawStory(snippet, idx, 'new'))
+            if (!$toBottomButton.hasClass('hide'))
                 showButton($newAlert)
+            else
+                $container.scrollTop($($container).prop('scrollHeight'))
         })
 
         $container.scroll(() => {
@@ -68,17 +68,17 @@ Macro.add('storyDesc', {
     }
 })
 
-function showButton($element) {
-    $element.addClass('show')
+function hideButton($element) {
+    $element.addClass('hide')
 }
 
-function hideButton($element) {
-    $element.removeClass('show')
+function showButton($element) {
+    $element.removeClass('hide')
 }
 
 function drawStory(snippet, idx, snippetAni) {
     let $desc = $('<div/>').wiki(snippet)
-    if(snippetAni)
+    if (snippetAni)
         $desc.addClass(snippetAni)
     $desc.on("transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd", () => { $desc.removeClass('new') })
     if (idx % 2 === 0)
