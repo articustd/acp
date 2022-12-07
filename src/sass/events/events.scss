@@ -166,6 +166,10 @@
             margin: 0.5em;
             border-color: transparent;
 
+            @media only screen and (max-height: $phone) {
+                margin: 0 0.5em;
+            }
+
             &:disabled {
                 background: linear-gradient(#444, #444) no-repeat;
                 background-position: center;

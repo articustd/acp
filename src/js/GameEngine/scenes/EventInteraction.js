@@ -24,26 +24,23 @@ export class EventInteraction extends Scene {
     create(data) {
         this.eventName = data.eventName
         this.passives = data.passives
-        
+
         this.resources = _.map(data.resources, (resource) => {
             return this.add.resource(resource)
         })
         this.interactions = _.map(data.interactions, (interaction) => {
             return this.add.interaction(interaction)
         })
-        
-        this.story = this.add.story(data.startingDesc)
-        this.queueMax = data.queueMax
-        this.activeQueue = new Queue()
 
-        this.setQueue()
+        this.story = this.add.story(data.startingDesc)
+        this.activeQueue = new Queue()
     }
 
     update(t, dt) {
-        if(this.passiveSnippets.length > 0) {
+        if (this.passiveSnippets.length > 0) {
             this.passiveCounter++
             let rand = _.random(1, 10000)
-            if(this.passiveCounter > this.passiveMin && rand > 9990){
+            if (this.passiveCounter > this.passiveMin && rand > 9990) {
                 this.story.push(this.findSnippet())
                 this.passiveCounter = 0
             }
@@ -51,7 +48,8 @@ export class EventInteraction extends Scene {
     }
 
     changePassiveSnippets(name) {
-        this.passiveSnippets = _.find(this.passives, {name}).snippets
+        this.passiveSnippets = _.find(this.passives, { name }).snippets
+        this.setQueue()
         this.passiveCounter = 0
     }
 
@@ -62,17 +60,17 @@ export class EventInteraction extends Scene {
     }
 
     randSnippet() {
-        let snippetIdx = _.random(0, this.passiveSnippets.length - 1)    
-        if (_.find(this.activeQueue.queue, (o)=>{return o === snippetIdx}) !== undefined)
+        let snippetIdx = _.random(0, this.passiveSnippets.length - 1)
+        if (_.find(this.activeQueue.queue, (o) => { return o === snippetIdx }) !== undefined)
             snippetIdx = this.randSnippet()
         return snippetIdx
     }
 
     setQueue() {
-        if(this.queueMax)
+        if (this.queueMax)
             this.activeQueue.max = this.queueMax
         else
-            this.activeQueue.max = _.floor(this.passiveSnippets.length/2, 0)
+            this.activeQueue.max = _.floor(this.passiveSnippets.length / 2, 0)
         
         this.activeQueue.clear()
     }
@@ -97,10 +95,10 @@ export class EventInteraction extends Scene {
         this.eventName = data.eventName
         this.passiveSnippets = data.passiveSnippets
         this.passiveCounter = data.passiveCounter
-        _.each(data.resources, (resource) => { 
+        _.each(data.resources, (resource) => {
             _.find(this.resources, { name: resource.name }).loadData(resource)
         })
-        _.each(data.interactions, (interaction) => { 
+        _.each(data.interactions, (interaction) => {
             _.find(this.interactions, { name: interaction.name }).loadData(interaction)
         })
         this.story.loadData(data.story)
