@@ -180,9 +180,11 @@
             border-color: transparent;
             display: none;
             opacity: 0;
+            pointer-events: none;
 
             &[open] {
                 display: flex;
+                pointer-events: all;
                 animation: fade-in 400ms forwards 100ms;
             }
 
