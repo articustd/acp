@@ -94,6 +94,7 @@
             border-top: 2px;
             border-bottom: 2px;
             height: 40em;
+            scroll-behavior: smooth;
 
             &:hover {
                 overflow-y: overlay;
