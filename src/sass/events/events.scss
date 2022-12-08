@@ -46,7 +46,7 @@
             width: 3em;
             z-index: 1;
             opacity: 1;
-            animation: fadeIn 0.5s;
+            animation: fade-in 400ms forwards 100ms;
             background: transparent;
 
             &-bottom {
@@ -136,11 +136,11 @@
                 text-align: center;
 
                 &.new {
-                    animation: append-animate 0.3s ease-out;
+                    animation: slide-right 400ms forwards;
                 }
 
                 &.load {
-                    animation: fadeIn 0.3s ease-out;
+                    animation: fade-in 400ms forwards;
                 }
             }
 
@@ -177,6 +177,19 @@
             flex: 1 1 18em;
             margin: 0.5em;
             border-color: transparent;
+            display: none;
+            opacity: 0;
+
+            &[open] {
+                display: flex;
+                animation: fade-in 400ms forwards 100ms;
+            }
+
+            &[closing] {
+                display: flex;
+                pointer-events: none;
+                animation: fade-out 400ms forwards;
+            }
 
             @media only screen and (max-height: $phone) {
                 margin: 0 0.5em;
@@ -198,9 +211,13 @@
             }
         }
 
-        &>.hide {
-            display: none;
-        }
+        // &>.hide {
+        //     visibility: hidden;
+        // }
+
+        // &>.show {
+        //     display: flex;
+        // }
 
         // Tablet
         @media only screen and (max-height: $phone) {
@@ -211,24 +228,31 @@
     }
 }
 
-@keyframes append-animate {
+@keyframes slide-right {
     from {
         transform: translateX(-100%);
         opacity: 0;
     }
-
     to {
-        transform: translateY(0%);
+        transform: translateX(0%);
         opacity: 1;
     }
 }
 
-@keyframes fadeIn {
+@keyframes fade-in {
     from {
         opacity: 0;
     }
-
     to {
         opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
     }
 }

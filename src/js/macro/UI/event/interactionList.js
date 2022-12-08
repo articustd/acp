@@ -9,7 +9,7 @@ Macro.add('interactionList', {
 
         _.each(event.interactions, (interaction) => {
             let detectTap = false;
-            let $btn = $('<button/>').wiki(interaction.name).on('click', (event) => {
+            let $btn = $('<button/>').wiki(interaction.name).addClass(interaction.classes).on('click', (event) => {
                 if (event.type == "click") detectTap = true;
                 if (detectTap) {
                     interaction.fire()
@@ -30,16 +30,14 @@ Macro.add('interactionList', {
                 detectTap = false; // Detects all touch events
             });
 
-            if (!interaction.active)
-                $btn.addClass('hide')
-            else
-                $btn.addClass(interaction.classes)
+            if (interaction.active)
+                showButton($btn)
 
             interaction.on(`${interaction.name}ActiveChange`, (active) => {
                 if (active)
-                    $btn.removeClass('hide')
+                    showButton($btn)
                 else
-                    $btn.addClass('hide')
+                    hideButton($btn)
             })
 
             interaction.on(`${interaction.name}CounterChange`, (counter) => {
@@ -61,6 +59,19 @@ Macro.add('interactionList', {
         })
     }
 })
+
+function showButton($ele) {
+    $ele.attr('open', true)
+}
+
+function hideButton($ele) {
+    $ele.removeAttr('open')
+    $ele.attr('closing')
+
+    $ele.one('animationend', () => {
+        $ele.removeAttr('closing')
+    })
+}
 
 function calcBackgroundSize({ counter, baseCounter }, $btn) {
     if (counter > 0 && baseCounter > 0) {
