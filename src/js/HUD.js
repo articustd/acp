@@ -17,7 +17,7 @@ export function showHUD() {
     $restartMenuButton.click(() => { Dialog.close(); UI.restart(); })
     $saveStoryMenuButton.click(() => {
         let blob = new Blob([exportStory(event)], { type: "text/plain;charset=utf-8" });
-        saveAs(blob, 'story.txt')
+        saveAs(blob, `${event.eventName}.txt`)
     })
 
     let $tickerEditorButton = createMenuItem(`Ticker Editor`)

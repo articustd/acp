@@ -56,5 +56,3 @@ sugarcube-2:
       name: attackBar
     startEvent:
       name: startEvent
-    saveStory:
-      name: saveStory
