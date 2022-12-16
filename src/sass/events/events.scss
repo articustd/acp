@@ -39,12 +39,12 @@
         flex: 1;
 
         &.to {
+            z-index: 3;
             display: block;
             visibility: visible;
             position: absolute;
             height: 2em;
             width: 3em;
-            z-index: 1;
             opacity: 1;
             animation: fade-in 400ms forwards 100ms;
             background: transparent;
@@ -94,6 +94,7 @@
             border-top: 2px;
             border-bottom: 2px;
             height: 40em;
+            z-index: 2;
 
             &:hover {
                 overflow-y: overlay;
@@ -129,6 +130,7 @@
             }
 
             &>div {
+                z-index: 1;
                 display: flex;
                 padding: 1em;
                 justify-content: center;
@@ -209,6 +211,14 @@
 
                 &:hover {
                     background-color: #ff3131;
+                }
+            }
+
+            &.green {
+                background-color: #2ea42e;
+
+                &:hover {
+                    background-color: #5dc25d;
                 }
             }
         }

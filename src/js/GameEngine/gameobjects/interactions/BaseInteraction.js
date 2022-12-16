@@ -36,7 +36,6 @@ export class BaseInteraction extends GameObjects.GameObject {
         })
 
         this.setSnippetActive()
-        this.setQueue()
         this._cooldown = this.baseCooldown + 1
         this.interval = (this.snippetsActive.length > 1) ? _.floor(this.baseCooldown / this.snippetsActive.length) : this.baseCooldown
 
@@ -56,6 +55,8 @@ export class BaseInteraction extends GameObjects.GameObject {
     fire() {
         if (this.clear)
             this.scene.story.clearActiveInteractions()
+        if (this.singleClear)
+            this.active = false
         if (this.passive)
             this.scene.changePassiveSnippets(this.passive)
         if (this.resoureProvide)
@@ -71,6 +72,7 @@ export class BaseInteraction extends GameObjects.GameObject {
     }
 
     pushSnippet() {
+        logger(this)
         this.scene.story.push(this.findSnippet())
         this.scene.story.activateInteractions(this.leadsTo)
     }
@@ -82,17 +84,38 @@ export class BaseInteraction extends GameObjects.GameObject {
     }
 
     progress(amt = 1) {
-        this.counter += amt
+        if (this.resourceUse)
+            this.counter = amt
+        else
+            this.counter += amt
     }
 
     setResourceUse() {
         this.resourceUse = this.scene.getResource(this.resourceUse)
+        if (this.baseCounter > 0)
+            this.counter = this.resourceUse.total
 
-        this.resourceUse.on(`${this.resourceUse.name}TotalChange`, (total)=>{ this.setSnippetActive() })
+        this.resourceUse.on(`${this.resourceUse.name}TotalChange`, (total) => { this.setSnippetActive(); this.progress(total); })
     }
 
     setSnippetActive() {
         if (this.resourceUse) {
+            if (_.isArray(this.snippets)) {
+                this.snippetsActive = this.snippets
+                this.setQueue()
+                return
+            }
+            if (this.poolSnippets) {
+                let pooled = []
+                _.each(this.snippets, (snippet, key) => {
+                    let remainder = this.resourceUse.total - key
+                    if (remainder >= 0)
+                        pooled.push(...snippet)
+                })
+                this.snippetsActive = pooled
+                this.setQueue(false)
+                return
+            }
             let comp = [0, this.resourceUse.total]
             _.each(this.snippets, (snippet, key) => {
                 let remainder = this.resourceUse.total - key
@@ -101,18 +124,21 @@ export class BaseInteraction extends GameObjects.GameObject {
                 return remainder // Remainder is 0, kick out early
             })
             this.snippetsActive = this.snippets[comp[0]]
+            this.setQueue()
             return
         }
         this.snippetsActive = this.snippets
+        this.setQueue()
     }
 
-    setQueue() {
-        if(this.queueMax)
+    setQueue(empty = true) {
+        if (this.queueMax)
             this.activeQueue.max = this.queueMax
         else
-            this.activeQueue.max = _.floor(this.snippetsActive.length/2, 0)
-        
-        this.activeQueue.clear()
+            this.activeQueue.max = _.floor(this.snippetsActive.length / 2, 0)
+
+        if (empty)
+            this.activeQueue.clear()
     }
 
     findSnippet() {
@@ -122,8 +148,8 @@ export class BaseInteraction extends GameObjects.GameObject {
     }
 
     randSnippet() {
-        let snippetIdx = _.random(0, this.snippetsActive.length - 1)    
-        if (_.find(this.activeQueue.queue, (o)=>{return o === snippetIdx}) !== undefined)
+        let snippetIdx = _.random(0, this.snippetsActive.length - 1)
+        if (_.find(this.activeQueue.queue, (o) => { return o === snippetIdx }) !== undefined)
             snippetIdx = this.randSnippet()
         return snippetIdx
     }
@@ -139,10 +165,10 @@ export class BaseInteraction extends GameObjects.GameObject {
 
     toJSON() {
         let activeQueue = this.activeQueue.toJSON()
-        return { 
+        return {
             name: this.name,
             _active: this._active,
-            _cooldown: this.cooldown, 
+            _cooldown: this.cooldown,
             snippetsActive: this.snippetsActive,
             _counter: this.counter,
             activeQueue
