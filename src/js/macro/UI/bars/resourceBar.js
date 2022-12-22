@@ -4,20 +4,23 @@ import _ from "lodash"
 
 Macro.add('resourceBar', {
     skipArgs: false,
-    tags: null,
     handler: function () {
-        let [resourceName] = this.args
-        let resource = getScene('MainLoop').getResource(resourceName)
-        let $barContainer = $('<div/>').addClass('tick-bar-container')
+        let resourceName = 'Attraction'
+        let resource = getScene('EventInteraction').getResource(resourceName)
+        let $container = $('<div/>').addClass('bar-container')
+        let $barContainer = $('<div/>').addClass('resource-bar')
         let $barText = $('<span/>').addClass('tick-bar-text-diff')
-        let $bar = $('<div/>').addClass('tick-bar-simple').css({ 'width': getWidth(resource.tick, resource.spawnRate)})
+        let $bar = $('<div/>').addClass('tick-bar-simple').css({ 'width': getWidth(resource.total, resource.maxAmount)})
         
-        resource.on(`${resourceName}Tick`, function ({ tick, spawnRate }) { $bar.css({ 'width': getWidth(tick, spawnRate) }) })
+        resource.on(`${resourceName}TotalChange`, function (total) { 
+            logger({total})
+            $bar.css({ 'width': getWidth(total, resource.maxAmount) }) 
+        })
         
-        if(this.payload[0])
-            $barText.wiki(this.payload[0].contents)
+        $barText.wiki(resourceName)
 
-        $barContainer
+        $container
+            .append($barContainer)
             .append($barText)
             .append($bar)
             .appendTo(this.output)

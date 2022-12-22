@@ -13,7 +13,6 @@ sugarcube-2:
       name: resourceCounter
     resourceBar:
       name: resourceBar
-      container: true
     resourceWorkerControl:
       name: resourceWorkerControl
     koboldAvailableCounter:

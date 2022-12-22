@@ -163,11 +163,22 @@
         }
     }
 
+    &-controls {
+        display: flex;
+        flex-direction: column;
+
+        @media only screen and (max-height: $phone) {
+            margin-top: 0;
+            flex: 2;
+            min-width: 20em;
+        }
+    }
+
     &-interactions {
         @extend .events;
         flex-flow: row wrap;
         max-width: 53.5em;
-        margin-top: 2em;
+        margin-top: 1em;
 
         &>.header {
             @include header;
@@ -235,7 +246,7 @@
         @media only screen and (max-height: $phone) {
             margin-top: 0;
             flex: 2;
-            max-width: 25em;
+            max-width: 20em;
         }
     }
 }

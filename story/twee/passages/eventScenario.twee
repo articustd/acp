@@ -3,7 +3,10 @@
     <div class="events-story">
         <<storyDesc>>
     </div>
-    <div class="events-interactions">
-        <<interactionList>>
+    <div class="events-controls">
+        <<resourceBar>>
+        <div class="events-interactions">
+            <<interactionList>>
+        </div>
     </div>
 </div>
