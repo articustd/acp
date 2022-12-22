@@ -2,17 +2,17 @@ export let fangDate = {
     eventName: 'A Date with Fang',
     interactions: [
         {
-            active: true, name: 'Introduce Yourself', clear: true, baseCooldown: 100, resourceUse: 'Flirt', resourceProvide: 'Flirt', provideAmount: 1,
+            active: true, name: 'Introduce Yourself', clear: true, baseCooldown: 100, resourceUse: 'Attraction', resourceProvide: 'Attraction', provideAmount: 1,
             snippets: {
                 0: [`“I’m $name, by the way.” You introduce yourself. “It’s nice to meet you.”<br/><br/>Fang laughs and pats you on the back with one of his huge hands hard enough you almost stumble. “$name, eh? Cute. And I bet it is nice to meet me, isn’t it? I would say it’s nice to have run into you but I think we both know that’s not how it happened.” Fang teased good-naturedly.<br/><br/>Again you felt yourself blushing at the wolf’s extreme confidence bordering on arrogance. But, unlike other people you had seen and met that thought way too much of themselves you didn’t detect any maliciousness or demeaning sense of superiority in his words. Fang clearly thought the world of himself but he didn’t seem to look down on you in the process. In a way it felt strangely… comforting. Despite how arrogant and self-assured Fang sounded you just couldn’t imagine him actually bullying someone and tearing them down.`],
                 3: [`“Oh, uh. Sorry. I forgot to introduce myself.” You explained with a mixture of embarrassment and shame. You’d been so distracted with all of, well, Fang that you hadn’t even told him your name. “I’m $name. Its uh… its great to meet you.”<br/><br/>The wolf chuckled in good humor before giving you a friendly slap on the back. Unfortunately for someone his size a friendly slap nearly sent you stumbling forward! Luckily you caught yourself before you fell down again. When you looked back towards the wolf he was just grinning back down at you with that almost constant cocky demeanor of his. Fang was obviously full of himself. Not that you could necessarily blame him when he had a body like that. The weird thing was that no matter how much the wolf talked himself up or bragged you didn’t get any feeling of maliciousness or sense that he thought less of you for not being him.<br/><br/>He clearly had no reluctance to compare himself to you but when he did so you started to realize he never actually did so in a way that was putting you down. He’d take any opportunity to say how much bigger his arms or chest were compared to yours but never actually implied you were small or inferior. Just that he was bigger. Somehow, despite having a body that seemed built for it, you couldn’t quite bring yourself to imagine Fang actually bullying someone and tearing them down.`]
             },
             leadsTo: [`Admire`, `Praise`, `Flirt`]
         },
-        { active: true, name: 'Shake Hands', singleClear: true, baseCooldown: 100, resourceProvide: 'Flirt', provideAmount: 3, snippets: [`Reaching out you shake the wolf's hand.`] },
+        { active: true, name: 'Shake Hands', singleClear: true, baseCooldown: 100, resourceProvide: 'Attraction', provideAmount: 3, snippets: [`Reaching out you shake the wolf's hand.`] },
         { active: false, name: 'Admire', clear: true, baseCooldown: 100, leadsTo: [`Look Fang Over`, `Compare to Yourself`, 'Flirtatious Touching', `Back`] },
         {
-            active: false, name: 'Look Fang Over', baseCooldown: 100, resourceUse: 'Flirt', resourceProvide: 'Flirt', provideAmount: 1, poolSnippets: true,
+            active: false, name: 'Look Fang Over', baseCooldown: 100, resourceUse: 'Attraction', resourceProvide: 'Attraction', provideAmount: 1, poolSnippets: true,
             snippets: {
                 0: [`You’re can’t stop from gawking momnentarily at how thick the tree trunks Fang calls legs are.`, `You admire Fang’s big, sleeve-straining biceps`],
                 6: [`You catch yourself staring at the wolf’s thick ass visibly stretching out the seat of his jeans.`],
@@ -20,14 +20,14 @@ export let fangDate = {
             }
         },
         {
-            active: false, name: 'Compare to Yourself', baseCooldown: 100, resourceUse: 'Flirt', resourceProvide: 'Flirt', provideAmount: 1, poolSnippets: true,
+            active: false, name: 'Compare to Yourself', baseCooldown: 100, resourceUse: 'Attraction', resourceProvide: 'Attraction', provideAmount: 1, poolSnippets: true,
             snippets: {
                 0: [`You can’t help but be a bit intimidated by Fang’s height. You’re not short but your head still doesn’t even come up to the base of his neck.`, `There was no contest that the wolf was bigger than you. Even if you were the same height as him he’d still drastically outweigh you in pure muscle and could still probably snap you like a toothpick.`],
                 4: [`Subtly you shift your stance to extend one of your feet closer to Fang’s. You shudder when you realize the wolf’s massive open-toed shoes are almost twice the size of your own and still barely fit his feet.`]
             }
         },
         {
-            active: false, name: 'Flirtatious Touching', baseCooldown: 100, resourceUse: 'Flirt', resourceProvide: 'Flirt', provideAmount: 1, poolSnippets: true,
+            active: false, name: 'Flirtatious Touching', baseCooldown: 100, baseCounter: 6, resourceUse: 'Attraction', resourceProvide: 'Attraction', provideAmount: 1, poolSnippets: true,
             snippets: {
                 0: [`Moving closer you smile up at the looming wolf as you rest a hand on the small of his back; slowly rubbing your hand in small circles much to his amused approval.`, `You gently lay your hand on top of Fang’s where it’s resting on his hip, brushing your fingers against the space between his as if to insinuate the two of you interlock your fingers.`],
                 8: [`Risking being a bit forward you move in closer to the wolf’s side and casually rest a hand on one of his asscheeks to give it a slow, firm squeeze.`]
@@ -35,7 +35,7 @@ export let fangDate = {
         },
         { active: false, name: 'Praise', clear: true, baseCooldown: 100, leadsTo: [`Compliment Height`,`Compliment Musculature`,`Compliment Body`,`Back`] },
         {
-            active: false, name: 'Compliment Height', baseCooldown: 100, resourceProvide: 'Flirt', provideAmount: 1,
+            active: false, name: 'Compliment Height', baseCooldown: 100, resourceProvide: 'Attraction', provideAmount: 1,
             snippets: [
                 `You offhandedly mention to Fang that it must be hard getting around campus considering he must have to duck under most doorways. His reply is to grin smugly and brag “Yea, but it sure does make a statement anytime I enter a room, does it?”`,
                 `You subtly move a bit closer to better compare your height to the wolf. Only coming up to the middle of the wolf’s chest you only realize you’ve been spacing out, staring, for several seconds when Fang clears his throat to catch your attention.<br/><br/>“You ok down there? Yea? Ok good. Just wanted to make sure. Sometimes it’s hard to tell from this altitude.” The thin attempt he made to hide a smirk evaporates at his last statement.`,
@@ -43,7 +43,7 @@ export let fangDate = {
             ]
         },
         {
-            active: false, name: 'Compliment Musculature', baseCooldown: 100, resourceProvide: 'Flirt', provideAmount: 1,
+            active: false, name: 'Compliment Musculature', baseCooldown: 100, resourceProvide: 'Attraction', provideAmount: 1,
             snippets: [
                 `After being unable to help but stare when the wolf takes a deep breath and his shirt visibly strains around his chest you hear yourself speak aloud without intending to.<br/><br/>“God your pecs are massive.”<br/><br/>Clearly not put out at all Fang puffs his chest out intentionally this time and even makes them bounce a bit by flexing one then the other while growling almost hungrily.<br/><br/>“Well they have to be, otherwise they wouldn’t match the rest of me.”`,
                 `“How do you even get arms that big?” You ask. “Those things are huge! You’ve probably got more muscle in one arm than my whole body.<br/><br/>Fang pulls his lips back in an intimidatingly fang-filled, feral grin while clearly trying to make himself look as monstrous and wild as possible. Then he leans down so hes face to face with you and rumbles in the deepest, most monster-like voice he can mange<br/><br/>“I eat other buff guys.”<br/><br/>He’s only able to hold the menacing aura for another second before it cracks and rolls of deep laughter boom from him.<br/><br/>“Just kidding. It’s genetics.”`,
@@ -51,7 +51,7 @@ export let fangDate = {
             ]
         },
         {
-            active: false, name: 'Compliment Body', baseCooldown: 100, resourceProvide: 'Flirt', provideAmount: 1,
+            active: false, name: 'Compliment Body', baseCooldown: 100, resourceProvide: 'Attraction', provideAmount: 1,
             snippets: [
                 `Trying not to obsess over the sheer size of the wolf you mention how sof and smooth his fur looks. He invites you to take a feel and holds an arm out for you to brush your fingers over the surprisingly pleasant feeling black fur along his forearm.<br/><br/>“Its the only part of me that’s soft. Or at least, the only part that is ALWAYS soft.” Fang teases with a wink.`,
                 `Despite everything else being so attention-grabbing about the monster of a wolf It’s surprising how much his bright blue eyes stand out in contrast to his jet black fur. When you mention that the wolf actually pauses for a moment to look down at you. Then his lips spread into an, if still cocky, much softer smile than before and he thanks you appreciatively without further self-aggrandizement. At least, for the moment.`,
@@ -60,7 +60,7 @@ export let fangDate = {
         },
         { active: false, name: 'Flirt', clear: true, baseCooldown: 100, leadsTo: [`Ask Fang to Flex`,`Ask What He's Up To`,`Make Inuendo`,`Back`] },
         {
-            active: false, name: 'Ask Fang to Flex', baseCooldown: 100, resourceUse: 'Flirt', resourceProvide: 'Flirt', provideAmount: 1, poolSnippets: true,
+            active: false, name: 'Ask Fang to Flex', baseCooldown: 100, resourceUse: 'Attraction', resourceProvide: 'Attraction', provideAmount: 1, poolSnippets: true,
             snippets: {
                 0: [
                     `You ask Fang to flex an arm for you so he grins and strikes a bicep pose, nearly tearing his shirt sleeve in the process.`, 
@@ -70,7 +70,7 @@ export let fangDate = {
             }
         },
         {
-            active: false, name: `Ask What He's Up To`, baseCooldown: 100, resourceProvide: 'Flirt', provideAmount: 1,
+            active: false, name: `Ask What He's Up To`, baseCooldown: 100, resourceProvide: 'Attraction', provideAmount: 1,
             snippets: [
                 `You ask him if he’s up to much today. The wolf gives you a casual shrug.<br/><br/>“You know, the usual. Was probably gonna go hang out at the gym for a bit and see if any of the guys are around. Then get something to eat and probably just head home and veg out tonight. Only had morning classes and no practice today so gonna just, y’know. Do whatever.” <br/><br/>Then the wolf smirks knowingly.<br/><br/>“Why, you wanting to hang out even though we just met?”<br/><br/>When he sees the look of discomfort that comes over you Fang lets out a boom of laughter and slaps your back hard enough to make you stumble.<br/><br/>“Calm down. I’m just messin with ya. You’re kinda cute when you’re flustered.”`,
                 `Trying to be subtle you ask Fang if he has any plans this weekend.<br/><br/>“Well me and some of the guys were gonna hang out on Sunday and probably roam the mall or something. I needed to stop by one of the stores there anyway and get a couple shirts fixed.” He pauses for a moment before shooting you a toothy grin. “Damn sleeves just keep blowing out, you know?”<br/><br/>As he says this he makes a show of flexing one of his biceps. The thick ball of muscle bulges obscenely and visibly strains the sleeve struggling to contain it.<br/><br/>“You wanna come? I can’t promise I’ll be doing much other clothes shopping for you to give me opinions on if you were wanting to see me getting dressed and undressed for you. But you never know…”<br/><br/>The flush that heats your face must have been visible because the wolf snickered and lowered his arm.<br/><br/>“You’re too easy.”`,
@@ -78,14 +78,14 @@ export let fangDate = {
             ]
         },
         {
-            active: false, name: `Make Inuendo`, baseCooldown: 100, resourceProvide: 'Flirt', provideAmount: 1,
+            active: false, name: `Make Inuendo`, baseCooldown: 100, resourceProvide: 'Attraction', provideAmount: 1,
             snippets: [
                 `You make an inuendo, roll a wisdom saving throw`
             ]
         },
         { active: false, name: 'Back', clear: true, baseCooldown: 100, leadsTo: [`Admire`, `Praise`, `Flirt`] },
         {
-            active: false, name: `Go back to Fang's Place`, clear: true, classes: 'green', baseCounter: 10, baseCooldown: 100, resourceUse: 'Flirt',
+            active: false, name: `Go back to Fang's Place`, clear: true, classes: 'green', baseCounter: 10, baseCooldown: 100, resourceUse: 'Attraction',
             snippets: [`Unable to resist your cascading attraction to Fang you ask him if he wants to hang out together for a while. Fang grins and agrees before leading you back to his place.`],
             leadsTo: [`Arrive at Fang's Place`]
         },
@@ -151,7 +151,7 @@ export let fangDate = {
         { name: 'Mouth Passive', snippets: ['You can feel their tiny hands clawing at your tongue trying to find purchase', `The kobold's unnaturally sweet taste fills your mouth and causes you to salivate more than usual`, `Tiny arms and legs wrap around your tongue and squeeze weakly. you can't tell if they're trying to hold onto it to avoid being swallowed or hugging it out of affection.`] }
     ],
     resources: [
-        { name: 'Flirt', maxAmount: 10 },
+        { name: 'Attraction', maxAmount: 10 },
         { name: 'Arouse', maxAmount: 10 },
         { name: 'Orgasm', maxAmount: 10 }
     ],
