@@ -5,6 +5,7 @@ import { EventInteraction } from './scenes/EventInteraction';
 import { ResourcePlugin } from './gameobjects/resources/ResourcePlugin';
 import { InteractionPlugin } from './gameobjects/interactions/InteractionPlugin';
 import { StoryPlugin } from './gameobjects/story';
+import { SnippetPlugin } from './gameobjects/snippets/SnippetPlugin';
 
 const myCustomCanvas = document.createElement('canvas');
 
@@ -40,6 +41,7 @@ let phaserConfig = {
             { key: 'InteractionPlugin', plugin: InteractionPlugin, start: true },
             { key: 'ResourcePlugin', plugin: ResourcePlugin, start: true },
             { key: 'StoryPlugin', plugin: StoryPlugin, start: true },
+            { key: 'SnippetPlugin', plugin: SnippetPlugin, start: true}
         ]
     },
     scene: MainLoop

@@ -72,8 +72,8 @@ export class BaseInteraction extends GameObjects.GameObject {
     }
 
     pushSnippet() {
-        logger(this)
-        this.scene.story.push(this.findSnippet())
+        if(this.snippetsActive.length > 0)
+            this.scene.story.push(this.findSnippet())
         this.scene.story.activateInteractions(this.leadsTo)
     }
 
@@ -99,6 +99,11 @@ export class BaseInteraction extends GameObjects.GameObject {
     }
 
     setSnippetActive() {
+        if(!this.snippets) {
+            this.snippetsActive = []
+            return
+        }
+
         if (this.resourceUse) {
             if (_.isArray(this.snippets)) {
                 this.snippetsActive = this.snippets
