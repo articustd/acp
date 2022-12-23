@@ -13,7 +13,6 @@ Macro.add('resourceBar', {
         let $bar = $('<div/>').addClass('tick-bar-simple').css({ 'width': getWidth(resource.total, resource.maxAmount)})
         
         resource.on(`${resourceName}TotalChange`, function (total) { 
-            logger({total})
             $bar.css({ 'width': getWidth(total, resource.maxAmount) }) 
         })
         

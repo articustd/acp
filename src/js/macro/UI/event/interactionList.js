@@ -34,8 +34,10 @@ Macro.add('interactionList', {
                 showButton($btn)
 
             interaction.on(`${interaction.name}ActiveChange`, (active) => {
-                if (active)
+                if (active) {
                     showButton($btn)
+                    calcBackgroundSize(interaction, $btn)
+                }
                 else
                     hideButton($btn)
             })

@@ -72,7 +72,7 @@ export class BaseInteraction extends GameObjects.GameObject {
     }
 
     pushSnippet() {
-        if(this.snippetsActive.length > 0)
+        if (this.snippetsActive.length > 0)
             this.scene.story.push(this.findSnippet())
         this.scene.story.activateInteractions(this.leadsTo)
     }
@@ -94,12 +94,11 @@ export class BaseInteraction extends GameObjects.GameObject {
         this.resourceUse = this.scene.getResource(this.resourceUse)
         if (this.baseCounter > 0)
             this.counter = this.resourceUse.total
-
         this.resourceUse.on(`${this.resourceUse.name}TotalChange`, (total) => { this.setSnippetActive(); this.progress(total); })
     }
 
     setSnippetActive() {
-        if(!this.snippets) {
+        if (!this.snippets) {
             this.snippetsActive = []
             return
         }
@@ -160,7 +159,7 @@ export class BaseInteraction extends GameObjects.GameObject {
     }
 
     get active() { return this._active }
-    set active(active) { this._active = active; this.counter = 0; this.emit(`${this.name}ActiveChange`, active); }
+    set active(active) { this._active = active; this.emit(`${this.name}ActiveChange`, active); }
 
     get cooldown() { return this._cooldown }
     set cooldown(cooldown) { this._cooldown = cooldown; this.emit(`${this.name}CooldownChange`, { cooldown: this.cooldown, baseCooldown: this.baseCooldown }); }

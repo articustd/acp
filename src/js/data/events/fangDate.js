@@ -74,11 +74,10 @@ export let fangDate = {
             snippets: [
                 `You ask him if he’s up to much today. The wolf gives you a casual shrug.<br/><br/>“You know, the usual. Was probably gonna go hang out at the gym for a bit and see if any of the guys are around. Then get something to eat and probably just head home and veg out tonight. Only had morning classes and no practice today so gonna just, y’know. Do whatever.” <br/><br/>Then the wolf smirks knowingly.<br/><br/>“Why, you wanting to hang out even though we just met?”<br/><br/>When he sees the look of discomfort that comes over you Fang lets out a boom of laughter and slaps your back hard enough to make you stumble.<br/><br/>“Calm down. I’m just messin with ya. You’re kinda cute when you’re flustered.”`,
                 `Trying to be subtle you ask Fang if he has any plans this weekend.<br/><br/>“Well me and some of the guys were gonna hang out on Sunday and probably roam the mall or something. I needed to stop by one of the stores there anyway and get a couple shirts fixed.” He pauses for a moment before shooting you a toothy grin. “Damn sleeves just keep blowing out, you know?”<br/><br/>As he says this he makes a show of flexing one of his biceps. The thick ball of muscle bulges obscenely and visibly strains the sleeve struggling to contain it.<br/><br/>“You wanna come? I can’t promise I’ll be doing much other clothes shopping for you to give me opinions on if you were wanting to see me getting dressed and undressed for you. But you never know…”<br/><br/>The flush that heats your face must have been visible because the wolf snickered and lowered his arm.<br/><br/>“You’re too easy.”`,
-                ``,
             ]
         },
         {
-            active: false, name: `Make Inuendo`, baseCooldown: 100, resourceProvide: 'Attraction', provideAmount: 1,
+            active: false, name: `Make Inuendo`, baseCooldown: 100, queueMax: 0, resourceProvide: 'Attraction', provideAmount: 1,
             snippets: [
                 `You make an inuendo, roll a wisdom saving throw`
             ]
