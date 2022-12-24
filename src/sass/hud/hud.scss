@@ -54,12 +54,17 @@
     margin: 0;
 
     >li {
-        border: 1px solid $hover-color;
+        // border: 1px solid $hover-color;
         height: 2.5em;
         margin: 5px 0px;
 
         >div {
             text-transform: uppercase;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }

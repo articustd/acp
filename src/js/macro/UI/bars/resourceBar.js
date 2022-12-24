@@ -7,15 +7,26 @@ Macro.add('resourceBar', {
     handler: function () {
         let resourceName = 'Attraction'
         let resource = getScene('EventInteraction').getResource(resourceName)
-        let $container = $('<div/>').addClass('bar-container')
+        let mainLoop = getScene('MainLoop')
+        let $container = $('<div/>').addClass('bar-container hide')
         let $barContainer = $('<div/>').addClass('resource-bar')
         let $barText = $('<span/>').addClass('tick-bar-text-diff')
-        let $bar = $('<div/>').addClass('tick-bar-simple').css({ 'width': getWidth(resource.total, resource.maxAmount)})
-        
-        resource.on(`${resourceName}TotalChange`, function (total) { 
-            $bar.css({ 'width': getWidth(total, resource.maxAmount) }) 
+        let $bar = $('<div/>').addClass('tick-bar-simple').css({ 'width': getWidth(resource.total, resource.maxAmount) })
+
+        resource.on(`${resourceName}TotalChange`, function (total) {
+            $bar.css({ 'width': getWidth(total, resource.maxAmount) })
         })
-        
+
+        mainLoop.events.on(`CheatsChange`, function ({ resourceShow }) {
+            if (!resourceShow)
+                $container.attr('hide', true)
+            else
+                $container.removeAttr('hide')
+        })
+
+        if (!mainLoop.cheats.resourceShow)
+            $container.attr('hide', true)
+
         $barText.wiki(resourceName)
 
         $container
@@ -27,5 +38,5 @@ Macro.add('resourceBar', {
 })
 
 function getWidth(curr, max) {
-    return (curr > 0) ? _.round((curr / max) * 100, 2)+'%' : '0%'
+    return (curr > 0) ? _.round((curr / max) * 100, 2) + '%' : '0%'
 }

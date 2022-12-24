@@ -9,6 +9,7 @@ export class MainLoop extends Scene {
         super("MainLoop")
 
         this.autosaveTick = 0
+        this._cheats = { resourceShow: false }
     }
 
     create() {
@@ -22,17 +23,23 @@ export class MainLoop extends Scene {
         }
     }
 
+    get cheats() {return this._cheats}
+    set cheats(cheats) {this._cheats = cheats; this.events.emit(`CheatsChange`, cheats)}
+
     toJSON() {
         let actions = _.map(this.actions, (action) => { return action.toJSON() })
-        return { actions }
+        return { actions, cheats: this._cheats }
     }
 
     loadData(data) {
         _.each(this.actions, (action) => {
             action.loadData(_.find(data.actions, { name: action.name }))
         })
+        this.cheats = data.cheats
     }
 
     getAction(name) { return _.find(this.actions, { name }) }
+
+    setCheat(key, value) { this.cheats[key] = value }
 
 }

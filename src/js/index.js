@@ -54,7 +54,6 @@ setup.ImagePath = "assets/";
 			default:
 				save.GameData = saveGameData()
 		}
-
 		save.title = getScene('EventInteraction').eventName
 	})
 

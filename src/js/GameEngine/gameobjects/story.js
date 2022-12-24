@@ -38,12 +38,14 @@ export class StoryObject extends GameObjects.GameObject {
         return {
             name: this.name,
             storySnippets: this.storySnippets,
+            cheats: this.cheats
         }
     }
 
     loadData(data) {
         this.name = data.name
         this.storySnippets = data.storySnippets
+        this.cheats = data.cheats
     }
 }
 
