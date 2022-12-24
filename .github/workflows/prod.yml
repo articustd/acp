@@ -20,7 +20,7 @@ jobs:
         run: npm install          
       
       - name: Configure for Prod
-        run: npm run config:prod
+        run: npm run config:premium
 
       - name: Build Game HTML
         run: |

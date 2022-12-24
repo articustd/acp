@@ -11,7 +11,7 @@ export function showHUD() {
 
     let $menuButton = $('<div/>').append('<i class="fa fa-bars" aria-hidden="true"/>').addClass('button menu-button right').attr('title', 'Cheat Menu')
     let $saveMenuButton = $('<div/>').append('<i class="fa fa-floppy-o" aria-hidden="true"/>').addClass('button menu-button no-radius').attr('title', 'Save/Load Game')
-    let $restartMenuButton = $('<div/>').append('<i class="fa fa-power-off" aria-hidden="true"/>').addClass('button menu-button right').attr('title', 'Restart Game')
+    let $restartMenuButton = $('<div/>').append('<i class="fa fa-power-off" aria-hidden="true"/>').addClass('button menu-button').attr('title', 'Restart Game')
     let $saveStoryMenuButton = $('<div/>').append('<i class="fa fa-book" aria-hidden="true"/>').addClass('button menu-button no-radius').attr('title', 'Export Story')
 
     $saveMenuButton.click(() => { Dialog.close(); UI.saves(); })
@@ -40,14 +40,12 @@ export function showHUD() {
     $menuButton.click(() => {
         Dialog.setup('Cheats')
 
-        if (variables().dev)
-            devButtons()
+        devButtons()
+        $resourceBarCheatCheckBox.prop('checked', mainLoop.cheats.resourceShow)
 
         Dialog.append($menuList)
             .append($menuVersion)
-        
-        $resourceBarCheatCheckBox.prop('checked', mainLoop.cheats.resourceShow)
-        
+
         Dialog.open()
     })
 
@@ -62,8 +60,11 @@ export function showHUD() {
         .append($saveMenuButton)
         .append($restartMenuButton)
 
-    if (variables().dev)
+    if (variables().subLevel === 'Premium') {
         $container.append($menuButton)
+        $restartMenuButton.addClass('no-radius')
+    } else
+        $restartMenuButton.addClass('right')
 
     $('#passages').before($container)
 }

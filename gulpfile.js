@@ -36,12 +36,17 @@ task(function buildTwee() {
 
 // Configure Environments
 task(function configDev() {
-    let config = '{"history": {"controls": true, "maxStates": 2  }, "debug": false, "logging": true, "dev": true }'
+    let config = '{"history": {"controls": true, "maxStates": 2  }, "debug": false, "logging": true, "subLevel": "Premium" }'
     return writeConfig(config)
 })
 
-task(function configProd() {
-    let config = '{"history": {"controls": true, "maxStates": 2  }, "debug": false, "logging": true, "dev": false }'
+task(function configBasic() {
+    let config = '{"history": {"controls": true, "maxStates": 2  }, "debug": false, "logging": false, "subLevel": "Basic" }'
+    return writeConfig(config)
+})
+
+task(function configPremium() {
+    let config = '{"history": {"controls": true, "maxStates": 2  }, "debug": false, "logging": false, "subLevel": "Premium" }'
     return writeConfig(config)
 })
 
