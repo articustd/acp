@@ -4,6 +4,8 @@
 #story {
     margin-top: 0;
     margin-bottom: 0;
+
+    
 };
 
 #ui-bar.stowed~#story {
@@ -43,4 +45,27 @@ button {
 
 #restart-ok, #restart-cancel {
     width: 4em;
+}
+
+body {
+    /* width */
+    &::-webkit-scrollbar {
+        width: 0.50em;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+        width: 0.50em;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: #999;
+    }
 }
