@@ -21,7 +21,7 @@ Config = {
 setup.ImagePath = "assets/";
 
 ((Config, State, Story, Engine, Dialog, $document) => {
-	$(document.head).append('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css" integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">')
+	$(document.head).append('<link rel="stylesheet" href="./assets/Fork-Awesome-1.2.0/css/fork-awesome.min.css">')
 
 	// Set State Variables
 	variables().debug = Config.debug
