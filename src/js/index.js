@@ -12,7 +12,7 @@ Config = {
 		autoload: checkAutoload(),
 		autosave: false,
 		id: 'acp',
-		isAllowed: function () { return State.passage !== 'Start' },
+		isAllowed: function () { return State.passage === 'eventScenario' },
 		slots: 8
 	},
 	ui: { stowBarInitially: true }
@@ -65,7 +65,7 @@ setup.ImagePath = "assets/";
 })(Config, State, Story, Engine, Dialog, $(document));
 
 function checkAutoload() {
-	return State.passage !== 'Start' && !_.isEmpty(State.passage) && Save.autosave.ok() && Save.autosave.has()
+	return State.passage === 'eventScenario' && !_.isEmpty(State.passage) && Save.autosave.ok() && Save.autosave.has()
 }
 
 function passageStartRoutine(ev) {

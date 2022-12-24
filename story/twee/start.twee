@@ -17,4 +17,4 @@ This game contains furry adult content, if you've gotten here by mistake now is 
 
 "What is your preferred pet name?" <<textbox "$pet" "Short Stuff">>
 
-<<button "Start" "eventScenario">><<startEvent 'A Date with Fang' 1>><</button>>
+<<button "Walk Around Campus" "intro">><</button>>
