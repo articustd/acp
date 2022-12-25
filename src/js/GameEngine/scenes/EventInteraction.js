@@ -16,93 +16,97 @@ export class EventInteraction extends Scene {
     constructor() {
         super("EventInteraction")
 
-        this.passiveSnippets = []
+        this.passiveSnippets = null
+        this.passiveGlobalSnippets = null
         this.passiveMin = 600 // Have this configurable in the story for when things get really spicy?
         this.passiveCounter = 0
+        this.passiveGlobalCounter = 0
     }
 
     create(data) {
         this.eventName = data.eventName
-        this.passives = data.passives
-
         this.resources = _.map(data.resources, (resource) => {
             return this.add.resource(resource)
+        })
+        this.passives = _.map(data.passives, (passive) => {
+            return this.add.interaction(passive)
         })
         this.interactions = _.map(data.interactions, (interaction) => {
             return this.add.interaction(interaction)
         })
 
         this.story = this.add.story(data.startingDesc)
-        this.activeQueue = new Queue()
+
+        this.activePassiveQueue = new Queue()
+        this.activePassiveGlobalQueue = new Queue()
     }
 
     update(t, dt) {
-        if (this.passiveSnippets.length > 0) {
+        if (this.passiveSnippets) {
             this.passiveCounter++
             let rand = _.random(1, 10000)
             if (this.passiveCounter > this.passiveMin && rand > 9990) {
-                this.story.push(this.findSnippet())
+                this.passiveSnippets.fire()
                 this.passiveCounter = 0
+            }
+        }
+        if (this.passiveGlobalSnippets) {
+            this.passiveGlobalCounter++
+            let rand = _.random(1, 10000)
+            if (this.passiveGlobalCounter > this.passiveMin * 2 && rand > 9990) {
+                this.passiveGlobalSnippets.fire()
+                this.passiveGlobalCounter = 0
             }
         }
     }
 
     changePassiveSnippets(name) {
-        this.passiveSnippets = _.find(this.passives, { name }).snippets
-        this.setQueue()
+        this.passiveSnippets = _.find(this.passives, { name })
         this.passiveCounter = 0
     }
 
-    findSnippet() {
-        let snippetIdx = this.randSnippet()
-        this.activeQueue.enqueue(snippetIdx)
-        return this.passiveSnippets[snippetIdx]
-    }
-
-    randSnippet() {
-        let snippetIdx = _.random(0, this.passiveSnippets.length - 1)
-        if (_.find(this.activeQueue.queue, (o) => { return o === snippetIdx }) !== undefined)
-            snippetIdx = this.randSnippet()
-        return snippetIdx
-    }
-
-    setQueue() {
-        if (this.queueMax)
-            this.activeQueue.max = this.queueMax
-        else
-            this.activeQueue.max = _.floor(this.passiveSnippets.length / 2, 0)
-        
-        this.activeQueue.clear()
+    changePassiveGlobalSnippets(name) {
+        this.passiveGlobalSnippets = _.find(this.passives, { name })
+        this.passiveGlobalCounter = 0
     }
 
     toJSON() {
         let interactions = _.map(this.interactions, (interaction) => { return interaction.toJSON() })
         let resources = _.map(this.resources, (resource) => { return resource.toJSON() })
+        let passives = _.map(this.passives, (passive) => { return passive.toJSON() })
         let story = this.story.toJSON()
-        let activeQueue = this.activeQueue.toJSON()
         return {
             eventName: this.eventName,
             interactions,
             resources,
+            passives,
             story,
-            passiveSnippets: this.passiveSnippets,
+            passiveSnippets: this.passiveSnippets ? this.passiveSnippets.name : 'Back',
+            passiveGlobalSnippets: this.passiveGlobalSnippets ? this.passiveGlobalSnippets.name : 'Back',
             passiveCounter: this.passiveCounter,
-            activeQueue
+            passiveGlobalCounter: this.passiveGlobalCounter
         }
     }
 
     loadData(data) {
+        logger(data)
         this.eventName = data.eventName
-        this.passiveSnippets = data.passiveSnippets
         this.passiveCounter = data.passiveCounter
+        this.passiveGlobalCounter = data.passiveGlobalCounter
         _.each(data.resources, (resource) => {
             _.find(this.resources, { name: resource.name }).loadData(resource)
         })
         _.each(data.interactions, (interaction) => {
             _.find(this.interactions, { name: interaction.name }).loadData(interaction)
         })
+        _.each(data.passives, (passive) => {
+            _.find(this.passives, { name: passive.name }).loadData(passive)
+        })
+
+        this.changePassiveSnippets(data.passiveSnippets)
+        this.changePassiveGlobalSnippets(data.passiveGlobalSnippets)
+
         this.story.loadData(data.story)
-        this.activeQueue.loadData(data.activeQueue)
     }
 
     getActiveInteractions() { return _.filter(this.interactions, { active: true }) }

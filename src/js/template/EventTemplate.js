@@ -7,3 +7,7 @@ Template.add('EventName', function() {
 Template.add('EventVersion', function() {
     return variables().version
 })
+
+Template.add('SubLevel', function() {
+    return variables().subLevel
+})

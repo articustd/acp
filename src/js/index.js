@@ -25,7 +25,7 @@ setup.ImagePath = "assets/";
 
 	// Set State Variables
 	variables().debug = Config.debug
-	variables().version = 'Pre-Alpha'
+	variables().version = 'Prototype'
 	variables().subLevel = Config.subLevel
 
 	// Config Auto Load if not on Start passage

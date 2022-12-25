@@ -11,7 +11,7 @@ export class Queue {
 
     enqueue(node) {
         this.queue.push(node)
-        if (this.max > 0 && this.queue.length > this.max)
+        if ((this.max > 0 && this.queue.length > this.max) || this.max === 0)
             this.dequeue()
     }
 

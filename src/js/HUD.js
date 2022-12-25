@@ -7,7 +7,7 @@ export function showHUD() {
     let mainLoop = getScene('MainLoop')
     let $container = $('<div/>').attr('id', 'hud')
 
-    $container.append($('<div/>').wiki(`''?EventName''~~?EventVersion~~`).addClass('hud-item'))
+    $container.append($('<div/>').wiki(`''?EventName''~~?EventVersion ?SubLevel~~`).addClass('hud-item'))
 
     let $menuButton = $('<div/>').append('<i class="fa fa-bars" aria-hidden="true"/>').addClass('button menu-button right').attr('title', 'Cheat Menu')
     let $saveMenuButton = $('<div/>').append('<i class="fa fa-floppy-o" aria-hidden="true"/>').addClass('button menu-button no-radius').attr('title', 'Save/Load Game')

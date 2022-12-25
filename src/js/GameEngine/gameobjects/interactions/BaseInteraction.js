@@ -30,6 +30,7 @@ export class BaseInteraction extends GameObjects.GameObject {
         this.baseCounter = 0
         this.progressInteractions = []
         this.activeQueue = new Queue()
+        this.baseCooldown = 100
 
         _.each(interactionData, (value, key) => {
             this[key] = value
@@ -59,6 +60,8 @@ export class BaseInteraction extends GameObjects.GameObject {
             this.active = false
         if (this.passive)
             this.scene.changePassiveSnippets(this.passive)
+        if (this.passiveGlobal)
+            this.scene.changePassiveGlobalSnippets(this.passiveGlobal)
         if (this.resoureProvide)
             this.resoureProvide.get(this.provideAmount)
         if (this.burnResource)

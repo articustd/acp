@@ -2,7 +2,7 @@ export let fangDate = {
     eventName: 'A Date with Fang',
     interactions: [
         {
-            active: true, name: 'Introduce Yourself', clear: true, baseCooldown: 100, resourceUse: 'Attraction', resourceProvide: 'Attraction', provideAmount: 1,
+            active: true, name: 'Introduce Yourself', clear: true, baseCooldown: 100, passiveGlobal:  'Attraction Global', resourceUse: 'Attraction', resourceProvide: 'Attraction', provideAmount: 1,
             snippets: {
                 0: [`“I’m $name, by the way.” You introduce yourself. “It’s nice to meet you.”<br/><br/>Fang laughs and pats you on the back with one of his huge hands hard enough you almost stumble. “$name, eh? Cute. And I bet it is nice to meet me, isn’t it? I would say it’s nice to have run into you but I think we both know that’s not how it happened.” Fang teased good-naturedly.<br/><br/>Again you felt yourself blushing at the wolf’s extreme confidence bordering on arrogance. But, unlike other people you had seen and met that thought way too much of themselves you didn’t detect any maliciousness or demeaning sense of superiority in his words. Fang clearly thought the world of himself but he didn’t seem to look down on you in the process. In a way it felt strangely… comforting. Despite how arrogant and self-assured Fang sounded you just couldn’t imagine him actually bullying someone and tearing them down.`],
                 3: [`“Oh, uh. Sorry. I forgot to introduce myself.” You explained with a mixture of embarrassment and shame. You’d been so distracted with all of, well, Fang that you hadn’t even told him your name. “I’m $name. Its uh… its great to meet you.”<br/><br/>The wolf chuckled in good humor before giving you a friendly slap on the back. Unfortunately for someone his size a friendly slap nearly sent you stumbling forward! Luckily you caught yourself before you fell down again. When you looked back towards the wolf he was just grinning back down at you with that almost constant cocky demeanor of his. Fang was obviously full of himself. Not that you could necessarily blame him when he had a body like that. The weird thing was that no matter how much the wolf talked himself up or bragged you didn’t get any feeling of maliciousness or sense that he thought less of you for not being him.<br/><br/>He clearly had no reluctance to compare himself to you but when he did so you started to realize he never actually did so in a way that was putting you down. He’d take any opportunity to say how much bigger his arms or chest were compared to yours but never actually implied you were small or inferior. Just that he was bigger. Somehow, despite having a body that seemed built for it, you couldn’t quite bring yourself to imagine Fang actually bullying someone and tearing them down.`]
@@ -10,7 +10,7 @@ export let fangDate = {
             leadsTo: [`Admire`, `Praise`, `Flirt`]
         },
         { active: true, name: 'Shake Hands', singleClear: true, baseCooldown: 100, resourceProvide: 'Attraction', provideAmount: 3, snippets: [`Reaching out you shake the wolf's hand.`] },
-        { active: false, name: 'Admire', clear: true, baseCooldown: 100, leadsTo: [`Look Fang Over`, `Compare to Yourself`, 'Flirtatious Touching', `Back`] },
+        { active: false, name: 'Admire', clear: true, baseCooldown: 100, queueMax: 0, passive: 'Admire Passive', snippets: [`As subtly as you can you slip a bit closer to the massive wolf so you can better admire him without being too obvious.`], leadsTo: [`Look Fang Over`, `Compare to Yourself`, 'Flirtatious Touching', `Back`] },
         {
             active: false, name: 'Look Fang Over', baseCooldown: 100, resourceUse: 'Attraction', resourceProvide: 'Attraction', provideAmount: 1, poolSnippets: true,
             snippets: {
@@ -33,7 +33,7 @@ export let fangDate = {
                 8: [`Risking being a bit forward you move in closer to the wolf’s side and casually rest a hand on one of his asscheeks to give it a slow, firm squeeze.`]
             }
         },
-        { active: false, name: 'Praise', clear: true, baseCooldown: 100, leadsTo: [`Compliment Height`,`Compliment Musculature`,`Compliment Body`,`Back`] },
+        { active: false, name: 'Praise', clear: true, baseCooldown: 100, queueMax: 0, passive: 'Praise Passive', snippets: [`Unable to help yourself from swooning at the presence of this hulking beast of a man you steel yourself to voice some of your admiration while hopefully not sounding too eager or obsessive.<br/><br/>“Sorry if I keep staring. You’re just… wow.”<br/><br/>The admittance makes Fang’s grin hungrily. “Oh? Tell me what exactly is so ‘wow’ about me…”`], leadsTo: [`Compliment Height`, `Compliment Musculature`, `Compliment Body`, `Back`] },
         {
             active: false, name: 'Compliment Height', baseCooldown: 100, resourceProvide: 'Attraction', provideAmount: 1,
             snippets: [
@@ -58,31 +58,38 @@ export let fangDate = {
                 `“Ok I’m just going to say it.” You blurt out. “You’re really big. God-damned huge. Like, probably the biggest guy I’ve ever seen. Like. Not just tall, though you’re damn sure the tallest person I’ve ever met but you’re RIPPED bigger than some bodybuilders! Just… huge.”<br/><br/>Each addition just makes the wolf’s seemingly-permanent grin wider and water as he drinks up each praising word. His tail actually twitches back and forth slightly in what looks dangerously close to it trying to wag the longer you go on talking up how big he is. He clearly has an ego and clearly enjoys having it stroked.<br/><br/>After savoring the praise for a few moments he licks his lips and raises both arms up in a double bicep flex for you. “Damn right. Biggest beast you’re ever gonna meet.”`
             ]
         },
-        { active: false, name: 'Flirt', clear: true, baseCooldown: 100, leadsTo: [`Ask Fang to Flex`,`Ask What He's Up To`,`Make Inuendo`,`Back`] },
+        { active: false, name: 'Flirt', clear: true, baseCooldown: 100, queueMax: 0, passive: 'Flirt Passive', snippets: [`You don’t want to come off too desperate but you definitely want to get to know this monster of a wolf more. Just be casual and smooth, you tell yourself, just like you would be with any other person you wanted to express interest in. Just make a move and treat him like any other person… Even if the wolf you now had your eyes on looked like he was about as big as all of your previous people of interest put together.<br/><br/>“So, uh… “`], leadsTo: [`Ask Fang to Flex`, `Ask What He's Up To`, `Make Inuendo`, `Back`] },
         {
             active: false, name: 'Ask Fang to Flex', baseCooldown: 100, resourceUse: 'Attraction', resourceProvide: 'Attraction', provideAmount: 1, poolSnippets: true,
             snippets: {
                 0: [
-                    `You ask Fang to flex an arm for you so he grins and strikes a bicep pose, nearly tearing his shirt sleeve in the process.`, 
+                    `You ask Fang to flex an arm for you so he grins and strikes a bicep pose, nearly tearing his shirt sleeve in the process.`,
                     `You tell fang how huge his pecs look so he puffs his chest out to make them stretch out his shirt enough the hem rides up and exposes a hint of his midriff. `
                 ],
                 6: [`Blushing, you ask Fang if he likes showing off his muscles. Instead of answering he hunches forward and curls his arms in for a most muscular pose; threatening to shred the seams of his clothes from top to bottom!`]
             }
         },
         {
-            active: false, name: `Ask What He's Up To`, baseCooldown: 100, resourceProvide: 'Attraction', provideAmount: 1,
-            snippets: [
-                `You ask him if he’s up to much today. The wolf gives you a casual shrug.<br/><br/>“You know, the usual. Was probably gonna go hang out at the gym for a bit and see if any of the guys are around. Then get something to eat and probably just head home and veg out tonight. Only had morning classes and no practice today so gonna just, y’know. Do whatever.” <br/><br/>Then the wolf smirks knowingly.<br/><br/>“Why, you wanting to hang out even though we just met?”<br/><br/>When he sees the look of discomfort that comes over you Fang lets out a boom of laughter and slaps your back hard enough to make you stumble.<br/><br/>“Calm down. I’m just messin with ya. You’re kinda cute when you’re flustered.”`,
-                `Trying to be subtle you ask Fang if he has any plans this weekend.<br/><br/>“Well me and some of the guys were gonna hang out on Sunday and probably roam the mall or something. I needed to stop by one of the stores there anyway and get a couple shirts fixed.” He pauses for a moment before shooting you a toothy grin. “Damn sleeves just keep blowing out, you know?”<br/><br/>As he says this he makes a show of flexing one of his biceps. The thick ball of muscle bulges obscenely and visibly strains the sleeve struggling to contain it.<br/><br/>“You wanna come? I can’t promise I’ll be doing much other clothes shopping for you to give me opinions on if you were wanting to see me getting dressed and undressed for you. But you never know…”<br/><br/>The flush that heats your face must have been visible because the wolf snickered and lowered his arm.<br/><br/>“You’re too easy.”`,
-            ]
+            active: false, name: `Ask What He's Up To`, baseCooldown: 100, resourceUse: 'Attraction', resourceProvide: 'Attraction', provideAmount: 1, poolSnippets: true,
+            snippets: {
+                0: [
+                    `You ask him if he’s up to much today. The wolf gives you a casual shrug.<br/><br/>“You know, the usual. Was probably gonna go hang out at the gym for a bit and see if any of the guys are around. Then get something to eat and probably just head home and veg out tonight. Only had morning classes and no practice today so gonna just, y’know. Do whatever.” <br/><br/>Then the wolf smirks knowingly.<br/><br/>“Why, you wanting to hang out even though we just met?”<br/><br/>When he sees the look of discomfort that comes over you Fang lets out a boom of laughter and slaps your back hard enough to make you stumble.<br/><br/>“Calm down. I’m just messin with ya. You’re kinda cute when you’re flustered.”`,
+                    `Trying to be subtle you ask Fang if he has any plans this weekend.<br/><br/>“Well me and some of the guys were gonna hang out on Sunday and probably roam the mall or something. I needed to stop by one of the stores there anyway and get a couple shirts fixed.” He pauses for a moment before shooting you a toothy grin. “Damn sleeves just keep blowing out, you know?”<br/><br/>As he says this he makes a show of flexing one of his biceps. The thick ball of muscle bulges obscenely and visibly strains the sleeve struggling to contain it.<br/><br/>“You wanna come? I can’t promise I’ll be doing much other clothes shopping for you to give me opinions on if you were wanting to see me getting dressed and undressed for you. But you never know…”<br/><br/>The flush that heats your face must have been visible because the wolf snickered and lowered his arm.<br/><br/>“You’re too easy.”`,
+                ],
+                6: [
+                    `Fang catches you staring up at him as you struggle to work up the courage to try flirting more directly with him. Whatever he sees in your expression makes him leer amusedly at you before preempting whatever you were working your way up to saying.<br/><br/>“Sure has been a long day today. Might just head back home and lounge around the house for the rest of the day to just relax. You know, take off these constrictive pants and shirt and just get all cozy in the privacy of my own home. As much as I enjoy showing off the goods in these tight clothes it’s always a relief to take them off and not have to worry about tearing them with a single wrong move, you know?”<br/><br/>To emphasize his point he flexes a bicep again and makes a show of the thick, bulging ball of muscle visibly straining the sleeve of his shirt to the point you swear you can hear a few threads snap in the fabric.<br/><br/>“Though sometimes I wind up tearing them anyway trying to take them off. If only I had some cute little helper to take home with me and help me undress…”`
+                ]
+            },
         },
         {
-            active: false, name: `Make Inuendo`, baseCooldown: 100, queueMax: 0, resourceProvide: 'Attraction', provideAmount: 1,
+            active: false, name: `Make Inuendo`, baseCooldown: 100, resourceUse: 'Attraction', baseCounter: 8, resourceProvide: 'Attraction', provideAmount: 1,
             snippets: [
-                `You make an inuendo, roll a wisdom saving throw`
+                `“Has anyone ever told you that you have really big feet?” You ask. Then, blushing despite yourself, you continue. “Is it true what they say about guys with big feet true?”<br/><br/>The wolf shrugs as if in exasperation. “Sadly, no.” His lips then spread into a lupine imitation of a cheshire grin as he quickly adds. “They wildly understate it.”`,
+                `“Seriously tho every time I look at you I can’t get over just how BIG you are. Not just your height but like…. Everything about you!” You compliment Fang, blushing a bit when you realize you started gushing there for a moment.<br/><br/>Fang doesn’t seem put out tho. If anything, he’s practically preening under the praise. Not that it stops him from responding in a way that puts some pretty vivid and pants-tightening mental images in your head with how innuendo laced the last word is. “Oh yea, I don’t blame you. I really am damn big everywhere. And I mean ~everywhere.”`,
+                `You decide to try a bit of crude humor to mask your still rather obvious infatuation with Fang.<br/><br/>“So, would it be too much of a line for me to ask if your body is an iceberg cause I wanna make like the Titanic and hit it?”<br/><br/>Fang blinks for a moment in silence before bursting out in deep, rumbling rolls of laughter. He affectionatelyslaps a heavy hand on your shoulder hard enough that your knees nearly buckle from the weight and impact. When his laughter finally dies down his face takes on a serious, if still clearly amused tone. Then the wolf straightens his back to emphasize his full height and looms over you.<br/><br/>“If you want to play Titanic I’m down. I’ll be the iceberg and you’ll go down.”<br/><br/>The provocative waggle of his eyebrows following his own perverse response leave you stammering trying to respond while desperately trying to suppress the mental picture he had painted in your head. `
             ]
         },
-        { active: false, name: 'Back', clear: true, baseCooldown: 100, leadsTo: [`Admire`, `Praise`, `Flirt`] },
+        { active: false, name: 'Back', clear: true, passive:'Back', baseCooldown: 100, leadsTo: [`Admire`, `Praise`, `Flirt`] },
         {
             active: false, name: `Go back to Fang's Place`, clear: true, classes: 'green', baseCounter: 10, baseCooldown: 100, resourceUse: 'Attraction',
             snippets: [`Unable to resist your cascading attraction to Fang you ask him if he wants to hang out together for a while. Fang grins and agrees before leading you back to his place.`],
@@ -146,6 +153,52 @@ export let fangDate = {
         { active: false, name: 'Swallow', baseCooldown: 100, baseCounter: 3, clear: true, classes: 'red', final: true, snippets: ['Tilting your head back, you let the kobold slide back to the entrance to your throat before swallowing them down.', `Without warning you curl your tongue to shove them to the back of your mouth and, without ceremony, gulp them down`] },
     ],
     passives: [
+        {
+            name: 'Attraction Global', 
+            snippets: [
+                `Someone rounds the corner and nearly runs into your back much like you did to Fang. When they see you, then Fang they blush and immediately scamper off while muttering to themselves under their breath.<br/><br/>“God damn that guy is huge.”`,
+                `Someone rounds the corner and nearly runs into your back much like you did to Fang. When they see you, then Fang they blush and immediately scamper off while muttering to themselves under their breath.<br/><br/>“Wish I could get a piece of that.”`,
+                `Someone rounds the corner and nearly runs into your back much like you did to Fang. When they see you, then Fang they blush and immediately scamper off while muttering to themselves under their breath.<br/><br/>“Poor guy. Fang’s gonna tear him in half.”`,
+                `A small group of people walk past the two of you and briefly glance in your direction. As they pass you can hear whispered mutterings of mild jealousy and praise of Fang.<br/><br/>“Damn, I knew I should’ve made a move on Fang sooner.”<br/>“Maybe you should go ask that person he’s talking to if they want to share.”<br/>“Oh god, could you imagine?”`,
+                `A small group of people walk past the two of you and briefly glance in your direction. As they pass you can hear whispered mutterings of mild jealousy and praise of Fang.<br/><br/>“Oh my god, was that the guy you were telling me about?”<br/>“Yea, he’s gigantic. And I don’t just mean how tall he is if you know what I mean.”`,
+                `A small group of people walk past the two of you and briefly glance in your direction. As they pass you can hear whispered mutterings of mild jealousy and praise of Fang.<br/><br/>“Damn. What, does that wolf dude live at the gym or something?”<br/>“Na, bro. I heard he eats the other guys at the gym to absorb their size.”<br/>“Stop trying to project your fetishes, Ryan. We’ve all seen your browsing history.”`,
+                `A couple exit a nearby building, holding hands as they walk past. When they glance in you and Fang’s direction they both blush and speed up their pace, whispering to one another in hushed voices.<br/><br/>“I know we both weren’t interested in an open relationship but…”<br/>“Yea… you uh… you think he might be interested in a threesome? There’s plenty of him to share…”`,
+                `A couple exit a nearby building, holding hands as they walk past. When they glance in you and Fang’s direction they both blush and speed up their pace, whispering to one another in hushed voices.<br/><br/>“God look at those two. What if that were us?”<br/>“Yea but If I was as big as that guy I dunno if I could even get out of the house”<br/>“Who say’s I’d let you even leave the bed if you were built like that guy?”`,
+                `A couple exit a nearby building, holding hands as they walk past. When they glance in you and Fang’s direction they both blush and speed up their pace, whispering to one another in hushed voices.<br/><br/>“Look, Jen. Fang found another victim.”<br/>“Don’t say it like that. You make it sound like Fang’s gonna hurt them.”<br/>“Maybe not hurt them but we both remember how long before you could walk again after last time the big guy visited.”`
+            ]
+        },
+        {
+            name: 'Admire Passive', resourceUse: 'Attraction', poolSnippets: true,
+            snippets: {
+                0: [
+                    `Fang catches you staring and shoots you a toothy grin. Before you can avert your gaze he bounces his pecs for a brief moment just to tease you.`,
+                    `You suddenly realize you’ve been staring at one of Fang’s arms while he had been talking and quickly avert your gaze. Out of the corner of your eye you see him glance down at you from where he had been looking. You’re not sure if he caught you staring until you hear him snicker briefly under his breath. Yep, he saw you.`
+                ],
+                6: [
+                    `Fang shamelessly looks you up and down like he were eying a piece of meat. It’s not hard to tell from the way he’s licking his lips he likes what he sees.`
+                ]
+            }
+        },
+        {
+            name: 'Praise Passive', resourceUse: 'Attraction',
+            snippets: [
+                `Fang looks down at you expectantly, clearly looking forward to soaking up as much praise and attention as you’re willing to give.`,
+                `Fang’s tongue over his teeth and lips hungrily as if eager to devour your admiration like each word were a delicious treat.`,
+                `Despite his cocky, confident, and utterly in-control aura you catch Fang’s tail twitching behind him occasionally as if trying to wag in response to your attention and verbal admiration. In a way it’s cute to see someone so dominant and assertive in demeanor still showing hints of the same kinds of uncontrolled bodily quirks that any other person would have.`
+            ]
+        },
+        {
+            name: 'Flirt Passive', resourceUse: 'Attraction', poolSnippets: true,
+            snippets: {
+                0: [
+                    `The pressure of Fang’s eager attention seems like a physical weight on you at times as he waits for you to speak. The longer you take to say something the more amused he seems to get.`,
+                    `“You know…” Fang comments, looking you over with an uncharacteristically serious expression and a critical eye. His expression twists back into an amused, teasing smirk before he continues “You’re pretty easy on the eyes if I do say so, myself.” His smirk only grows when he the blush his words elicit on your face.`
+                ],
+                6: [
+                    `“Why yes, I am single.” Fang tells you out of the blue. From the amused look on his face he’s clearly trying to fluster you.`
+                ]
+            }
+        },
         { name: 'Grab Passive', snippets: ['The kobold looks around nervously as you hold them', 'Occasionally the kobold squirms in your grasp, careful not to accidentally slide from your grip and fall.', 'The kobold glances up at you, as much inspecting you as you inspect them, before their attention wanders to something else around them'] },
         { name: 'Mouth Passive', snippets: ['You can feel their tiny hands clawing at your tongue trying to find purchase', `The kobold's unnaturally sweet taste fills your mouth and causes you to salivate more than usual`, `Tiny arms and legs wrap around your tongue and squeeze weakly. you can't tell if they're trying to hold onto it to avoid being swallowed or hugging it out of affection.`] }
     ],
